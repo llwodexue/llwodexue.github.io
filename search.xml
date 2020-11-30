@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>JS 垃圾回收与性能优化</title>
-    <url>/blog/posts/3344fd09/</url>
+    <url>/posts/3344fd09/</url>
     <content><![CDATA[<p>JavaScript 通过自动内存管理实现内存分配和闲置资源回收，基本思路：确定哪个变量不会再使用，然后释放它占用的内存。这个过程是周期性的，即垃圾回收程序每隔一定时间就会自动运行。但是某块内是否还有用，属于“不可判断的”问题，意味着靠算法是解决不了的</p>
 <a id="more"></a>
 
@@ -54,7 +54,7 @@
   </entry>
   <entry>
     <title>圣杯布局和双飞翼布局</title>
-    <url>/blog/posts/6669e648/</url>
+    <url>/posts/6669e648/</url>
     <content><![CDATA[<p>圣杯布局和双飞翼布局，虽然两者的实现方法略有差异，不过都遵循了以下要点：</p>
 <ul>
 <li>两侧宽度固定，中间宽度自适应</li>
@@ -124,7 +124,7 @@
   </entry>
   <entry>
     <title>获取文件夹下所有图片尺寸</title>
-    <url>/blog/posts/5a7a946b/</url>
+    <url>/posts/5a7a946b/</url>
     <content><![CDATA[<p>有时候我们爬取了一堆图片，需要知道这些图片尺寸大小或名字以便日后处理。一个一个弄很是费劲，我们可以用 python 批量获取一下并生成 csv</p>
 <ul>
 <li>如果图片后缀比较多（png jpg jpeg bmp），可以在 suffix里进行添加</li>
@@ -158,7 +158,7 @@
   </entry>
   <entry>
     <title>JS 变量提升</title>
-    <url>/blog/posts/ea26882a/</url>
+    <url>/posts/ea26882a/</url>
     <content><![CDATA[<p>当浏览器开辟出供 js 执行的栈内存之后，代码并不是立即自上而下执行，而是需要先做一些事情：把当前作用域中带 var 和 function 的关键字进行提前的声明和定义（变量提升）</p>
 <ul>
 <li>var：只声明，未定义（不赋值）</li>
@@ -338,7 +338,7 @@
   </entry>
   <entry>
     <title>牛客网本地刷题环境部署</title>
-    <url>/blog/posts/bf596df5/</url>
+    <url>/posts/bf596df5/</url>
     <content><![CDATA[<p>牛客网在线判题系统使用帮助：<a href="https://www.nowcoder.com/discuss/276">https://www.nowcoder.com/discuss/276</a></p>
 <a id="more"></a>
 
@@ -387,7 +387,7 @@
   </entry>
   <entry>
     <title>vscode造成电脑卡顿</title>
-    <url>/blog/posts/fc53734b/</url>
+    <url>/posts/fc53734b/</url>
     <content><![CDATA[<h3 id="主流解决方案"><a href="#主流解决方案" class="headerlink" title="主流解决方案"></a>主流解决方案</h3><p>最近使用 Vscode 总是特别卡顿，网上大部分的解决方案如下（但是没有什么效果）</p>
 <ul>
 <li>search.followSymlinksd: false （控制是否在搜索中跟踪符号链接）</li>
@@ -429,7 +429,7 @@
   </entry>
   <entry>
     <title>Swiper使用案例</title>
-    <url>/blog/posts/47fd9c19/</url>
+    <url>/posts/47fd9c19/</url>
     <content><![CDATA[<p>官网链接：<a href="https://www.swiper.com.cn/">https://www.swiper.com.cn/</a></p>
 <p>文档链接：<a href="https://www.swiper.com.cn/usage/index.html">Swiper使用方法</a> 、<a href="https://www.swiper.com.cn/api/index.html">Swiper的API文档</a></p>
 <a id="more"></a>
@@ -543,7 +543,7 @@
   </entry>
   <entry>
     <title>JS 不同数据类型的相互转换规则</title>
-    <url>/blog/posts/8a7b4226/</url>
+    <url>/posts/8a7b4226/</url>
     <content><![CDATA[<p><strong>对象和对象进行比较的时候：比较的是空间地址</strong>，如果空间地址相同就是 true，不同就是 false</p>
 <ul>
 <li><code>&#123;&#125;==&#123;&#125;(false)</code></li>
@@ -625,7 +625,7 @@
   </entry>
   <entry>
     <title>JS 数组去重的四种方法</title>
-    <url>/blog/posts/908d091d/</url>
+    <url>/posts/908d091d/</url>
     <content><![CDATA[<h3 id="方法一：双-for-循环"><a href="#方法一：双-for-循环" class="headerlink" title="方法一：双 for 循环"></a>方法一：双 for 循环</h3><ul>
 <li>原理：依次拿出数组中的每一项，和它后面的所有剩余项进行比较，如果有相同的就删除</li>
 <li>NaN 与任何值都不相等，包括 NaN 本身</li>
@@ -674,7 +674,7 @@
   </entry>
   <entry>
     <title>JS 实现奇偶行变色</title>
-    <url>/blog/posts/97acee74/</url>
+    <url>/posts/97acee74/</url>
     <content><![CDATA[<h1 id="JS实现奇偶行变色，鼠标滑上改变颜色，离开恢复颜色"><a href="#JS实现奇偶行变色，鼠标滑上改变颜色，离开恢复颜色" class="headerlink" title="JS实现奇偶行变色，鼠标滑上改变颜色，离开恢复颜色"></a>JS实现奇偶行变色，鼠标滑上改变颜色，离开恢复颜色</h1><blockquote>
 <p>css 奇偶行变色是通过 <code>li:nth(odd)</code> 和 <code>li:nth(even)</code> 实现的，鼠标滑上改变颜色，离开恢复颜色是通过 <code>:hover</code> 实现的</p>
 </blockquote>
