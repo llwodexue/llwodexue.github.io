@@ -1,6 +1,223 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>JS 原型继承</title>
+    <url>/posts/3792d7db/</url>
+    <content><![CDATA[<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>继承机制使得不同的实例可以共享构造函数的原型对象的属性和方法</p>
+<a id="more"></a>
+
+<h3 id="原型链继承"><a href="#原型链继承" class="headerlink" title="原型链继承"></a>原型链继承</h3><blockquote>
+<p>基本思想是利用原型让一个引用类型继承另一个引用类型的属性和方法。我们知道每个构造函数都有一个原型对象（<code>prototype</code>），原型对象都包含一个指向构造函数的指针（<code>constructor</code>），而实例都包含一个指向原型对象的内部指针（<code>__proto__</code>）</p>
+<p>那么，如果让一个构造函数的原型对象等于另一个类型的实例，此时的原型对象将包含一个指向另一个原型的指针，相应地，另一个原型中也包含着一个指向另一个构造函数的指针</p>
+</blockquote>
+<ul>
+<li><p>想要让 B 所有的实例继承 A 类私有和公有方法：</p>
+<p>私有属性：使用构造函数时添加给实例的属性</p>
+<p>公有属性：构造函数原型上的属性</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.a = <span class="string">&quot;a&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line">A.prototype.getA = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.a);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.b = <span class="string">&quot;b&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 让 B 类的原型指向 A 类的实例</span></span><br><span class="line">B.prototype = <span class="keyword">new</span> A();</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>让 B 类的原型（prototype）指向 A 类的实例，此时 B 类的原型是 A 类的实例（继承 A 类私有属性），同时 B 类的原型的 <code>__proto__</code> 指向 A 类的原型（继承 A 的公有属性）</li>
+</ul>
+<p><img data-src="https://gitee.com/lilyn/pic/raw/master/js-img/%E5%8E%9F%E5%9E%8B%E7%BB%A7%E6%89%BF.png" alt="原型继承"></p>
+<p><strong>原型链继承的问题：</strong>通过原型链继承后，B 的原型继承了 A 的实例属性变成了 B 的原型属性，若继承 A 的实例属性里面有引用数据类型，更改 B 的实例属性 colors，后续 B 的实例的实例属性 colors 都会被修改</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.colors = [<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>];</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="comment">// new A()创建实例，实例拥有 colors 属性</span></span><br><span class="line"><span class="comment">// B 的原型改为该实例，则 B 的原型中添加 colors 属性</span></span><br><span class="line">B.prototype = <span class="keyword">new</span> A();</span><br><span class="line"><span class="keyword">var</span> arr1 = <span class="keyword">new</span> B();</span><br><span class="line">arr1.colors.push(<span class="string">&quot;yellow&quot;</span>);</span><br><span class="line"><span class="built_in">console</span>.log(arr1.colors); <span class="comment">// [ &#x27;red&#x27;, &#x27;green&#x27;, &#x27;yellow&#x27; ]</span></span><br><span class="line"><span class="keyword">var</span> arr2 = <span class="keyword">new</span> B();</span><br><span class="line"><span class="built_in">console</span>.log(arr2.colors); <span class="comment">// [ &#x27;red&#x27;, &#x27;green&#x27;, &#x27;yellow&#x27; ]</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>原型链继承的另一个问题：</strong>在创建子类型的实例时，不能向超类型的构造函数中传递参数。实践中很少会单独使用原型链继承</p>
+<h3 id="中间类继承"><a href="#中间类继承" class="headerlink" title="中间类继承"></a>中间类继承</h3><p>某些实例不属于某些类，但是想要用这个类原型上的方法，可以手动的去更改实例的 <code>__proto__</code> ，让它指向这个类的原型，这样这个实例就可以使用这个类的原型上的方法</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">arguments</span>.__proto__ = <span class="built_in">Array</span>.prototype;</span><br><span class="line">    <span class="comment">// arguments 是一个对象，对象上没有 sort 方法会报错</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">arguments</span>.sort(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a - b;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(fn(<span class="number">5</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">4</span>)); <span class="comment">// Array &#123; &#x27;0&#x27;: 3, &#x27;1&#x27;: 4, &#x27;2&#x27;: 5, &#x27;3&#x27;: 6 &#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="借用构造函数（call-继承）"><a href="#借用构造函数（call-继承）" class="headerlink" title="借用构造函数（call 继承）"></a>借用构造函数（call 继承）</h3><blockquote>
+<p>基本思想：在子类型构造函数的内部调用超类型构造函数，通过 apply() 和 call() 方法可以在新创建的对象上执行构造函数</p>
+</blockquote>
+<p>B 类和 A 类，想要让 B 类的实例拥有 A 类的私有属性（但不拥有公有属性），我们可以让 A 当成普通函数执行，把里面的 this 指向改成 B 类的实例（往 B 的实例中添加属性）</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.a = <span class="string">&quot;a&quot;</span>;</span><br><span class="line">    <span class="built_in">this</span>.x = <span class="number">100</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 实例 b this</span></span><br><span class="line">    <span class="comment">// 去执行 A()，但A里this和B里this不是一个，需要用call绑定下this</span></span><br><span class="line">    A.call(<span class="built_in">this</span>)</span><br><span class="line">    <span class="built_in">this</span>.b = <span class="string">&quot;b&quot;</span>;</span><br><span class="line">    <span class="built_in">this</span>.y = <span class="number">200</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B();</span><br></pre></td></tr></table></figure>
+
+<p><strong>借用构造函数问题：</strong>因为方法都是在构造函数中定义，因此就没有函数复用。而且，超类型的原型中定义的方法，对子类型来说是不可见的（只能添加私有属性）。实践中很少会单独使用借用构造函数</p>
+<h3 id="寄生组合继承"><a href="#寄生组合继承" class="headerlink" title="寄生组合继承"></a>寄生组合继承</h3><blockquote>
+<p>基本思想：借用原型链实现对原型属性和方法的继承，通过借用构造函数来实现实例属性的继承。这样既通过原型上定义方法实现了函数的复用，又保证每个实例都有自己的属性</p>
+</blockquote>
+<p>需求：B 类要继承 A 类的私有属性和公有属性</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.a = <span class="string">&quot;a&quot;</span>;</span><br><span class="line">    <span class="built_in">this</span>.x = <span class="number">100</span>;</span><br><span class="line">&#125;</span><br><span class="line">A.prototype.getA = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.b = <span class="string">&quot;b&quot;</span>;</span><br><span class="line">    <span class="built_in">this</span>.y = <span class="number">200</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>我们很容易就能想到最简单的方法：A、B类的原型指向同一个堆内存地址。但修改时会相互影响，耦合性高，不推荐这么做</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">B.prototype = A.prototype;</span><br><span class="line">B.prototype.getB = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;B&quot;</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>我们可以先用借用构造函数获取 A 类的私有属性</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    A.call(<span class="built_in">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>再用原型链继承获取 A 类公有属性</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 可以考虑用普通对象做中间件</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">obj.__proto__ = A.prototype;</span><br><span class="line">B.prototype = obj;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 可以考虑用函数做中间件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">F.prototype = A.prototype;</span><br><span class="line">B.prototype = <span class="keyword">new</span> F();</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>上述方法可以简写一下，需要使用如下方法：</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 创建一个空对象，并且让空对象的 __proto__ 指向参数</span></span><br><span class="line">B.prototype = <span class="built_in">Object</span>.create(A.prototype);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Object.create() 方法，它可以传入一个对象作为该方法返回的对象的原型对象，原理如下：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.create = <span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 版本1</span></span><br><span class="line">    <span class="keyword">var</span> o = &#123;&#125;;</span><br><span class="line">    o.__proto__ = obj;</span><br><span class="line">    <span class="keyword">return</span> obj;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 版本2</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">    F.prototype = obj;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> F();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>另一种方法</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 继承私有属性</span></span><br><span class="line">    A.call(<span class="built_in">this</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 继承公有属性</span></span><br><span class="line">B.prototype = <span class="keyword">new</span> A();</span><br><span class="line">B.prototype.constructor = B;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>整理一下上述思路，合并一下代码</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.a = <span class="string">&quot;a&quot;</span>;</span><br><span class="line">    <span class="built_in">this</span>.x = <span class="number">100</span>;</span><br><span class="line">&#125;</span><br><span class="line">A.prototype.getA = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&quot;A&quot;</span>);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 1.获取私有属性</span></span><br><span class="line">    A.call(<span class="built_in">this</span>);</span><br><span class="line">    <span class="built_in">this</span>.b = <span class="string">&quot;b&quot;</span>;</span><br><span class="line">    <span class="built_in">this</span>.y = <span class="number">200</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 2.可以考虑用普通对象做中间件</span></span><br><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">obj.__proto__ = A.prototype;</span><br><span class="line">B.prototype = obj;</span><br><span class="line"><span class="comment">// 2.可以考虑用函数做中间件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">F</span>(<span class="params"></span>)</span>&#123;&#125;</span><br><span class="line">F.prototype = A.prototype;</span><br><span class="line">B.prototype = <span class="keyword">new</span> F();</span><br><span class="line"><span class="comment">// 2.使用 Object.create() 方法</span></span><br><span class="line">B.prototype = <span class="built_in">Object</span>.create(A.prototype);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3.使用原型链继承</span></span><br><span class="line">B.prototype = <span class="keyword">new</span> A();</span><br><span class="line">B.prototype.constructor = B;</span><br><span class="line"><span class="keyword">var</span> b = <span class="keyword">new</span> B();</span><br></pre></td></tr></table></figure>
+
+<p>组合继承融合了原型链和借用构造函数的优点，而且 instanceof 也能用于识别基于组合继承创建的对象，所以实践中最常用组合继承</p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>原型链继承</tag>
+        <tag>借用构造函数</tag>
+        <tag>寄生组合继承</tag>
+        <tag>中间类继承</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS 检测数据类型的四种方式</title>
+    <url>/posts/5d2789f/</url>
+    <content><![CDATA[<p>JavaScript 有八种数据类型：</p>
+<p>基本数据类型：Boolean、Number、String、null、undefined、Symbol(ES6新增)、BigInt（ES2020引入）</p>
+<p>引用数据类型：Object</p>
+<blockquote>
+<p>Symbol：表示独一无二的值</p>
+<p>BigInt：用来解决 JavaScript 中数字只能到 53 个二进制位，大于这个范围的整数，无法精确表示</p>
+</blockquote>
+<a id="more"></a>
+
+<h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h3><p>返回结果是一个字符串（全小写字母），可返回的类型有：</p>
+<ul>
+<li>“number”</li>
+<li>“string”</li>
+<li>“boolean”</li>
+<li>“undefined”</li>
+<li>“object”</li>
+<li>“function”</li>
+<li>“symbol”</li>
+<li>“bigint”</li>
+</ul>
+<p><strong>注意：</strong>下面这个需要特殊记忆</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typeof</span> <span class="literal">null</span>;  <span class="comment">// &quot;object&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>JS 最初为了性能考虑使用低位存储变量信息，000 开头代表对象，然而 null 表示全 0，所以将它错误的判断为 object</p>
+<h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><p>检测某个实例是否属于某个类，只要某个实例的原型链上出现了检测的类，检测结果就是 true</p>
+<p><strong>注意：</strong>instanceof 不能正确判断基本数据类型</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">arr <span class="keyword">instanceof</span> <span class="built_in">Array</span>;   <span class="comment">// true</span></span><br><span class="line">arr <span class="keyword">instanceof</span> <span class="built_in">Object</span>;  <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="literal">null</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>;  <span class="comment">// false</span></span><br><span class="line"><span class="number">123</span> <span class="keyword">instanceof</span> <span class="built_in">Number</span>;   <span class="comment">// false</span></span><br><span class="line"><span class="string">&quot;&quot;</span> <span class="keyword">instanceof</span> <span class="built_in">String</span>;    <span class="comment">// false</span></span><br><span class="line"><span class="literal">true</span> <span class="keyword">instanceof</span> <span class="built_in">Boolean</span>; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><p>constructor 可以得知某个实例对象，到底是哪一个构造函数产生的</p>
+<p><strong>注意：</strong>constructor 可以手动更改（如果手动更改原型指向，检测就不准确了）；如果修改了原型对象，一般也会同时修改 constructor。null 和 undefined 是无效的对象，所以不存在 constructor </p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="literal">true</span>.constructor === <span class="built_in">Boolean</span>; <span class="comment">// true</span></span><br><span class="line"><span class="keyword">var</span> a = &#123;&#125;;</span><br><span class="line">a.constructor; <span class="comment">// Object()</span></span><br><span class="line">a.constructor = <span class="number">3</span>;</span><br><span class="line">a.constructor; <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Object-prototype-toString-call"><a href="#Object-prototype-toString-call" class="headerlink" title="Object.prototype.toString.call()"></a>Object.prototype.toString.call()</h3><p>对于 Object，直接调用 toString 就可以返回 <code>&quot;[object Object]&quot;</code>。而对于其他对象，则需要通过 call/apply 来调用才能正确返回类型信息</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">null</span>); <span class="comment">// &quot;[object Null]&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>我们可以封装一个 isType 方法对类型进行判断</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">let</span> isType = <span class="function">(<span class="params">type, obj</span>) =&gt;</span></span><br><span class="line">    <span class="built_in">Object</span>.prototype.toString.call(obj) === <span class="string">`[object <span class="subst">$&#123;type&#125;</span>]`</span>;</span><br><span class="line"><span class="built_in">console</span>.log(isType(<span class="string">&quot;Number&quot;</span>, <span class="number">12</span>)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+<p>思考：每次都写 <code>Object.prototype.toString</code> 是否可以简写？</p>
+<ul>
+<li>如果调用 toString 方法，obj 首先会在自己私有方法里找，如果没有则顺着原型链往上找，所以 prototype 可以省略</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = &#123;&#125;;</span><br><span class="line">obj.toString.call(<span class="literal">null</span>); <span class="comment">// &quot;[object Null]&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>不过上面还是不够简洁，可否把 obj 直接省去？</p>
+<ul>
+<li>浏览器全局环境：window（是一个对象）</li>
+<li>node全局环境：global（是一个对象）</li>
+</ul>
+<p>obj 省去的话，则默认是 window 调用 toString，我们来看一下 window 的原型链，最终指向 Object</p>
+<p><img data-src="https://gitee.com/lilyn/pic/raw/master/js-img/window%E5%8E%9F%E5%9E%8B.jpg" alt="window原型"></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">toString.call(<span class="literal">null</span>); <span class="comment">// 浏览器：&quot;[object Null]&quot;</span></span><br><span class="line">toString.call(<span class="literal">null</span>); <span class="comment">// node：[object Null]</span></span><br></pre></td></tr></table></figure>
+
+<p>进一步验证一下，window 原型链上的 toString 是否和 Object.prototype 上的 toString 一致</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">window</span>.toString === <span class="built_in">Object</span>.prototype.toString; <span class="comment">// 浏览器：true</span></span><br><span class="line"><span class="built_in">global</span>.toString === <span class="built_in">Object</span>.prototype.toString; <span class="comment">// node：true</span></span><br></pre></td></tr></table></figure>
+
+<p>不过不推荐这么写，毕竟查找原型链还得花上一阵子时间</p>
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>typeof</tag>
+        <tag>instanceof</tag>
+        <tag>constructor</tag>
+        <tag>toString.call</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>JS 设计模式浅析</title>
+    <url>/posts/f356c3f6/</url>
+    <content><![CDATA[<blockquote>
+<p>设计模式：在面向对象软件设计过程中针对特定问题的简洁而优雅的解决方案</p>
+</blockquote>
+<p>一般来说，设计模式（Pattern Design）就是<strong>创建不同类型的对象的套路</strong></p>
+<a id="more"></a>
+
+<p>常见设计模式：</p>
+<ul>
+<li>单例设计模式：一个类仅有一个一个实例</li>
+<li>工厂模式：批量生产出具有相似属性和方法的对象</li>
+<li>构造函数模式：可以理解为是工厂模式的另一种写法</li>
+<li>发布订阅模式：定义对象间的一对多的关系</li>
+</ul>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><blockquote>
+<p>单例模式：保证一个类仅有一个实例，并提供一个访问它的全局访问点</p>
+</blockquote>
+<p>简单来说：单例模式就是一个对象</p>
+<h3 id="极简写法"><a href="#极简写法" class="headerlink" title="极简写法"></a>极简写法</h3><ul>
+<li>成员暴露出来，初始化占用资源</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> utils = &#123;</span><br><span class="line">    num: <span class="number">6</span>,</span><br><span class="line">    method: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.num;</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> obj = utils;</span><br><span class="line"><span class="built_in">console</span>.log(obj.method());</span><br></pre></td></tr></table></figure>
+
+<h3 id="闭包方式"><a href="#闭包方式" class="headerlink" title="闭包方式"></a>闭包方式</h3><ul>
+<li>解决成员暴露和初始化占用资源问题</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> utils = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> num = <span class="number">6</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.num;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        num: num,</span><br><span class="line">        method: fn,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="keyword">var</span> obj = utils;</span><br><span class="line"><span class="built_in">console</span>.log(obj.method());</span><br></pre></td></tr></table></figure>
+
+<p>应用：弹窗，无论点击多长次，弹窗只应该创建一次</p>
+<h2 id="工厂模式"><a href="#工厂模式" class="headerlink" title="工厂模式"></a>工厂模式</h2><blockquote>
+<p>工厂模式：像工厂一样批量生产相似属性和方法的对象。减少页面冗余代码，实现了“高耦合低内聚”</p>
+</blockquote>
+<p>简单来说，工厂模式就是函数</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        name: name,</span><br><span class="line">        age: age,</span><br><span class="line">        say: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> p = Person(<span class="string">&quot;lion&quot;</span>, <span class="number">13</span>);</span><br><span class="line">p.say();</span><br></pre></td></tr></table></figure>
+
+<h2 id="构造函数模式"><a href="#构造函数模式" class="headerlink" title="构造函数模式"></a>构造函数模式</h2><blockquote>
+<p>构造函数模式：利用构造函数的方式创建对象。函数执行是，前面一旦加了 new，就变成构造函数</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> Person(<span class="string">&quot;cat&quot;</span>, <span class="number">17</span>);</span><br><span class="line">f.sayName();</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>JavaScript</category>
+      </categories>
+      <tags>
+        <tag>JavaScript</tag>
+        <tag>设计模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>JS this指向问题</title>
     <url>/posts/ea5004b1/</url>
     <content><![CDATA[<p>在绝大多数情况下，函数的调用方式决定了 <code>this</code> 的值。<code>this</code> 不能在执行期间被赋值，并且在每次函数被调用时 <code>this</code> 的值也可能会不同，所以总结 <code>this</code> 值的规律是有必要的</p>
