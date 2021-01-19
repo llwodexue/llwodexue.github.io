@@ -5,19 +5,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 <meta name="generator" content="Hexo 5.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-<link rel="stylesheet" href="/blog/css/main.css">
+<link rel="stylesheet" href="/css/main.css">
 
 
-<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llmysnow.top","root":"/blog/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llmysnow.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="JavaScript 有八种数据类型： 基本数据类型：Boolean、Number、String、null、undefined、Symbol(ES6新增)、BigInt（ES2020引入） 引用数据类型：Object  Symbol：表示独一无二的值 BigInt：用来解决 JavaScript 中数字只能到 53 个二进制位，大于这个范围的整数，无法精确表示">
@@ -27,9 +27,10 @@
 <meta property="og:site_name" content="奇幻的梦之旅">
 <meta property="og:description" content="JavaScript 有八种数据类型： 基本数据类型：Boolean、Number、String、null、undefined、Symbol(ES6新增)、BigInt（ES2020引入） 引用数据类型：Object  Symbol：表示独一无二的值 BigInt：用来解决 JavaScript 中数字只能到 53 个二进制位，大于这个范围的整数，无法精确表示">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/lilyn/pic/raw/master/js-img/dir(Function.prototype).jpg">
 <meta property="og:image" content="https://gitee.com/lilyn/pic/raw/master/js-img/window%E5%8E%9F%E5%9E%8B.jpg">
 <meta property="article:published_time" content="2020-12-03T12:52:23.352Z">
-<meta property="article:modified_time" content="2020-12-09T13:05:21.925Z">
+<meta property="article:modified_time" content="2020-12-31T05:20:10.563Z">
 <meta property="article:author" content="LiLyn">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="typeof">
@@ -37,7 +38,7 @@
 <meta property="article:tag" content="constructor">
 <meta property="article:tag" content="toString.call">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://gitee.com/lilyn/pic/raw/master/js-img/window%E5%8E%9F%E5%9E%8B.jpg">
+<meta name="twitter:image" content="https://gitee.com/lilyn/pic/raw/master/js-img/dir(Function.prototype).jpg">
 
 <link rel="canonical" href="http://llmysnow.top/posts/5d2789f/">
 
@@ -83,7 +84,7 @@
   </style>
 </noscript>
 
-<link rel="alternate" href="/blog/atom.xml" title="奇幻的梦之旅" type="application/atom+xml">
+<link rel="alternate" href="/atom.xml" title="奇幻的梦之旅" type="application/atom+xml">
 </head>
 <!--即时预加载技术，在用户点击之前预先加载页面-->
 <script src="https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@2.0.2/js/instantclick-1.2.2.js" type="module"></script>
@@ -103,7 +104,7 @@
 
   <div class="site-meta">
 
-    <a href="/blog/" class="brand" rel="start">
+    <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
       <h1 class="site-title">奇幻的梦之旅</h1>
       <span class="logo-line-after"><i></i></span>
@@ -125,22 +126,22 @@
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
 
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
@@ -201,7 +202,7 @@
     <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/5d2789f/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/blog/images/logo.jpg">
+      <meta itemprop="image" content="/images/logo.jpg">
       <meta itemprop="name" content="LiLyn">
       <meta itemprop="description" content="">
     </span>
@@ -229,7 +230,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/blog/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
                 </span>
             </span>
 
@@ -239,14 +240,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2k</span>
+              <span>3.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -267,7 +268,10 @@
 </blockquote>
 <a id="more"></a>
 
-<h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h3><p>返回结果是一个字符串（全小写字母），可返回的类型有：</p>
+<h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h3><blockquote>
+<p>底层原理：typeof 是按照”值”在计算机存储的”二进制”值来检测的，凡是以000开始的都认为是对象</p>
+</blockquote>
+<p>返回结果是一个字符串（全小写字母），可返回的类型有：</p>
 <ul>
 <li>“number”</li>
 <li>“string”</li>
@@ -290,19 +294,48 @@
 <li>000：对象</li>
 </ul>
 <p>JS 最初为了性能考虑使用低位存储变量信息，000 开头代表对象，然而 null 表示全 0，所以将它错误的判断为 object</p>
-<h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><p>检测某个实例是否属于某个类，只要某个实例的原型链上出现了检测的类，检测结果就是 true</p>
-<p><strong>注意：</strong>instanceof 不能正确判断基本数据类型</p>
+<h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><blockquote>
+<p>底层原理：首先查找 <code>Symbol.hasInstance</code>，如果存在，基于这个检测。如果没有，则基于原型链<code>__proto__</code>查找，只要出现这个类的原型，结果就是true</p>
+</blockquote>
+<p><img data-src="https://gitee.com/lilyn/pic/raw/master/js-img/dir(Function.prototype).jpg" alt="dir(Function.prototype)"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fn</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 基于ES6 class方式构建Symbol.hasInstance才会生效</span></span><br><span class="line">    <span class="keyword">static</span>[<span class="built_in">Symbol</span>.hasInstance]() &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;OK&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> f = <span class="keyword">new</span> Fn;</span><br><span class="line"><span class="built_in">console</span>.log(f <span class="keyword">instanceof</span> Fn); <span class="comment">// OK false</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意：</strong></p>
+<ul>
+<li>instanceof 不能正确判断基本数据类型</li>
+<li>原型链可以重构，导致结果可能不准确</li>
+</ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line">arr <span class="keyword">instanceof</span> <span class="built_in">Array</span>;   <span class="comment">// true</span></span><br><span class="line">arr <span class="keyword">instanceof</span> <span class="built_in">Object</span>;  <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="literal">null</span> <span class="keyword">instanceof</span> <span class="built_in">Object</span>;  <span class="comment">// false</span></span><br><span class="line"><span class="number">123</span> <span class="keyword">instanceof</span> <span class="built_in">Number</span>;   <span class="comment">// false</span></span><br><span class="line"><span class="string">&quot;&quot;</span> <span class="keyword">instanceof</span> <span class="built_in">String</span>;    <span class="comment">// false</span></span><br><span class="line"><span class="literal">true</span> <span class="keyword">instanceof</span> <span class="built_in">Boolean</span>; <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="封装-instanceOf"><a href="#封装-instanceOf" class="headerlink" title="封装 instanceOf"></a>封装 instanceOf</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">instance_of</span>(<span class="params">target, ctor</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">let</span> tType = <span class="keyword">typeof</span> target,</span><br><span class="line">        cType = <span class="keyword">typeof</span> ctor;</span><br><span class="line">    <span class="comment">// 保证ctor是一个构造函数</span></span><br><span class="line">    <span class="keyword">if</span> (cType !== <span class="string">&quot;function&quot;</span> || !ctor.prototype) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">TypeError</span>(<span class="string">&quot;ctor is not a constructor!&quot;</span>);</span><br><span class="line">    <span class="comment">// 不处理原始值，排除null undefined 字面量</span></span><br><span class="line">    <span class="keyword">if</span> (target == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="regexp">/^(object|function)$/i</span>.test(tType)) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="comment">// 优先检测 Symbol.hasInstance</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> ctor[<span class="built_in">Symbol</span>.hasInstance] === <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> ctor[<span class="built_in">Symbol</span>.hasInstance](target);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 没有这个属性，再按照 ctor.prototype 是否出现在 example 的原型链上检测</span></span><br><span class="line">    <span class="keyword">let</span> prototype = <span class="built_in">Object</span>.getPrototypeOf(target);</span><br><span class="line">    <span class="keyword">while</span> (prototype) &#123;</span><br><span class="line">        <span class="keyword">if</span> (prototype == ctor.prototype) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        prototype = <span class="built_in">Object</span>.getPrototypeOf(prototype);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(instance_of([], <span class="built_in">Array</span>));  <span class="comment">// true</span></span><br><span class="line"><span class="built_in">console</span>.log(instance_of([], <span class="built_in">RegExp</span>)); <span class="comment">// false</span></span><br><span class="line"><span class="built_in">console</span>.log(instance_of([], <span class="built_in">Object</span>)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+
 
 <h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor"></a>constructor</h3><p>constructor 可以得知某个实例对象，到底是哪一个构造函数产生的</p>
 <p><strong>注意：</strong>constructor 可以手动更改（如果手动更改原型指向，检测就不准确了）；如果修改了原型对象，一般也会同时修改 constructor。null 和 undefined 是无效的对象，所以不存在 constructor </p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="literal">true</span>.constructor === <span class="built_in">Boolean</span>; <span class="comment">// true</span></span><br><span class="line"><span class="keyword">var</span> a = &#123;&#125;;</span><br><span class="line">a.constructor; <span class="comment">// Object()</span></span><br><span class="line">a.constructor = <span class="number">3</span>;</span><br><span class="line">a.constructor; <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="Object-prototype-toString-call"><a href="#Object-prototype-toString-call" class="headerlink" title="Object.prototype.toString.call()"></a>Object.prototype.toString.call()</h3><p>对于 Object，直接调用 toString 就可以返回 <code>&quot;[object Object]&quot;</code>。而对于其他对象，则需要通过 call/apply 来调用才能正确返回类型信息</p>
+<h3 id="Object-prototype-toString-call"><a href="#Object-prototype-toString-call" class="headerlink" title="Object.prototype.toString.call()"></a>Object.prototype.toString.call()</h3><blockquote>
+<p>底层原理：除了null/undefined，大部分数据类型所属类的原型上，都有toString方法；但是除了 Object.prototype.toString 用来检测数据类型，其余的都是转换为字符串的</p>
+<ul>
+<li>返回值：”[object ?]”<ul>
+<li>先查找 [val] 的 <code>Symbol.toStringTag</code> （先找私有的，私有没有则向所属类原型上找），属性值就是”?”的值</li>
+<li>没有，则内部是返回当前实例所属构造函数的名字 <code>“[object Number/String/Null/Undefined/Object/Array/Function/GeneratorFunction...]”</code></li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Fn</span> </span>&#123;&#125;</span><br><span class="line">Fn.prototype[<span class="built_in">Symbol</span>.toStringTag] = <span class="string">&#x27;Fn&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> f = <span class="keyword">new</span> Fn;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Object</span>.prototype.toString.call(f)); <span class="comment">// [object Fn]</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>对于 Object，直接调用 toString 就可以返回 <code>&quot;[object Object]&quot;</code>。而对于其他对象，则需要通过 call/apply 来调用才能正确返回类型信息</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.prototype.toString.call(<span class="literal">null</span>); <span class="comment">// &quot;[object Null]&quot;</span></span><br></pre></td></tr></table></figure>
 
 <p>我们可以封装一个 isType 方法对类型进行判断</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> isType = <span class="function">(<span class="params">type, obj</span>) =&gt;</span></span><br><span class="line">    <span class="built_in">Object</span>.prototype.toString.call(obj) === <span class="string">`[object <span class="subst">$&#123;type&#125;</span>]`</span>;</span><br><span class="line"><span class="built_in">console</span>.log(isType(<span class="string">&quot;Number&quot;</span>, <span class="number">12</span>)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+
+
 
 <p>思考：每次都写 <code>Object.prototype.toString</code> 是否可以简写？</p>
 <ul>
@@ -343,9 +376,9 @@
     <img src="https://gitee.com/lilyn/pic/raw/master/logo.jpg">
   </article>
   <article class="box-right">
-    <p><span>本文标题:</span><a href="/blog/posts/5d2789f/">JS 检测数据类型的四种方式</a></p>
+    <p><span>本文标题:</span><a href="/posts/5d2789f/">JS 检测数据类型的四种方式</a></p>
     <p><span>文章作者:</span><a href="/" title="访问 LiLyn 的个人博客">LiLyn</a></p>
-    <p><span>原始链接:</span><a href="/blog/posts/5d2789f/" title="JS 检测数据类型的四种方式">http://llmysnow.top/posts/5d2789f/</a>
+    <p><span>原始链接:</span><a href="/posts/5d2789f/" title="JS 检测数据类型的四种方式">http://llmysnow.top/posts/5d2789f/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://llmysnow.top/posts/5d2789f/"  aria-label="复制成功！"></i></span>
   </p>
     <p><span>许可协议:</span>转载请保留原文链接及作者。</p>  
@@ -370,11 +403,11 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/blog/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-              <a href="/blog/tags/typeof/" rel="tag"><i class="fa fa-tag"></i> typeof</a>
-              <a href="/blog/tags/instanceof/" rel="tag"><i class="fa fa-tag"></i> instanceof</a>
-              <a href="/blog/tags/constructor/" rel="tag"><i class="fa fa-tag"></i> constructor</a>
-              <a href="/blog/tags/toString-call/" rel="tag"><i class="fa fa-tag"></i> toString.call</a>
+              <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+              <a href="/tags/typeof/" rel="tag"><i class="fa fa-tag"></i> typeof</a>
+              <a href="/tags/instanceof/" rel="tag"><i class="fa fa-tag"></i> instanceof</a>
+              <a href="/tags/constructor/" rel="tag"><i class="fa fa-tag"></i> constructor</a>
+              <a href="/tags/toString-call/" rel="tag"><i class="fa fa-tag"></i> toString.call</a>
           </div>
 		 
 		<!--post-tags 彩色标签-->
@@ -399,11 +432,11 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/blog/posts/f356c3f6/" rel="prev" title="JS 设计模式浅析">
+    <a href="/posts/f356c3f6/" rel="prev" title="JS 设计模式浅析">
       <i class="fa fa-chevron-left"></i> JS 设计模式浅析
     </a></div>
       <div class="post-nav-item">
-    <a href="/blog/posts/3792d7db/" rel="next" title="JS 原型继承">
+    <a href="/posts/3792d7db/" rel="next" title="JS 原型继承">
       JS 原型继承 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -464,36 +497,36 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#typeof"><span class="nav-text">typeof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof"><span class="nav-text">instanceof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor-NaN"><span class="nav-text">constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-prototype-toString-call"><span class="nav-text">Object.prototype.toString.call()</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#typeof"><span class="nav-text">typeof</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#instanceof"><span class="nav-text">instanceof</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%81%E8%A3%85-instanceOf"><span class="nav-text">封装 instanceOf</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor-NaN"><span class="nav-text">constructor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object-prototype-toString-call"><span class="nav-text">Object.prototype.toString.call()</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image" alt="LiLyn"
-      src="/blog/images/logo.jpg">
+      src="/images/logo.jpg">
   <p class="site-author-name" itemprop="name">LiLyn</p>
   <div class="site-description" itemprop="description"></div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
-          <a href="/blog/archives/">
+          <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">24</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-            <a href="/blog/categories/">
+            <a href="/categories/">
           
         <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
-            <a href="/blog/tags/">
+            <a href="/tags/">
           
-        <span class="site-state-item-count">57</span>
+        <span class="site-state-item-count">64</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -541,7 +574,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -550,12 +583,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">79k</span>
+    <span title="站点总字数">85k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:11</span>
+    <span title="站点阅读时长">1:18</span>
 </div>
 
 <!--
@@ -589,20 +622,20 @@
   </div>
 
   
-  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
   <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.min.js"></script>
-  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
 
-<script src="/blog/js/utils.js"></script>
+<script src="/js/utils.js"></script>
 
-<script src="/blog/js/motion.js"></script>
-
-
-<script src="/blog/js/schemes/pisces.js"></script>
+<script src="/js/motion.js"></script>
 
 
-<script src="/blog/js/next-boot.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
 
 
 
@@ -638,7 +671,7 @@
 
 
   
-<script src="/blog/js/local-search.js"></script>
+<script src="/js/local-search.js"></script>
 
 
 
@@ -662,5 +695,5 @@
   <script type="text/javascript">
 	!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
   </script>
-<script src="/blog/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/blog/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
 </html>
