@@ -20,17 +20,17 @@
     var CONFIG = {"hostname":"llmysnow.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="Vue+Element 国际化(i18n)路由页面切换语言 国际化安装 i18ninternationalization 这个单词中，i 和 n 之间有 18 个字母 注意：当前 i18n 最新版本为 9 版本，9 版本没有 VueI18n，import VueI18n from &#39;vue-i18n&#39; 解构会报错 Cannot read property &#39;install&amp;">
+  <meta name="description" content="安装 i18ninternationalization 这个单词中，i 和 n 之间有 18 个字母">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue + Element 国际化(i18n)路由页面切换语言">
 <meta property="og:url" content="http://llmysnow.top/posts/82482c19/index.html">
 <meta property="og:site_name" content="奇幻的梦之旅">
-<meta property="og:description" content="Vue+Element 国际化(i18n)路由页面切换语言 国际化安装 i18ninternationalization 这个单词中，i 和 n 之间有 18 个字母 注意：当前 i18n 最新版本为 9 版本，9 版本没有 VueI18n，import VueI18n from &#39;vue-i18n&#39; 解构会报错 Cannot read property &#39;install&amp;">
+<meta property="og:description" content="安装 i18ninternationalization 这个单词中，i 和 n 之间有 18 个字母">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/lilyn/pic/raw/master/company-img/%E5%9B%BD%E9%99%85%E5%8C%96%E4%BF%A1%E6%81%AF.jpg">
 <meta property="og:image" content="https://gitee.com/lilyn/pic/raw/master/company-img/%E5%88%87%E6%8D%A2%E8%AF%AD%E8%A8%80.gif">
 <meta property="article:published_time" content="2021-05-06T08:38:25.955Z">
-<meta property="article:modified_time" content="2021-05-06T08:47:13.590Z">
+<meta property="article:modified_time" content="2021-05-06T08:50:53.934Z">
 <meta property="article:author" content="LiLyn">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="Element">
@@ -258,8 +258,9 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <p>Vue+Element 国际化(i18n)路由页面切换语言</p>
-<h2 id="国际化"><a href="#国际化" class="headerlink" title="国际化"></a>国际化</h2><h3 id="安装-i18n"><a href="#安装-i18n" class="headerlink" title="安装 i18n"></a>安装 i18n</h3><p><code>internationalization</code> 这个单词中，i 和 n 之间有 18 个字母</p>
+        <h2 id="安装-i18n"><a href="#安装-i18n" class="headerlink" title="安装 i18n"></a>安装 i18n</h2><p><code>internationalization</code> 这个单词中，i 和 n 之间有 18 个字母</p>
+<a id="more"></a>
+
 <p><strong>注意：</strong>当前 i18n 最新版本为 9 版本，9 版本没有 VueI18n，<code>import VueI18n from &#39;vue-i18n&#39;</code> 解构会报错 <code>Cannot read property &#39;install&#39; of undefined</code></p>
 <ul>
 <li>这里为了让 Element 兼容，安装的是 8 版本的</li>
@@ -464,7 +465,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%BD%E9%99%85%E5%8C%96"><span class="nav-text">国际化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-i18n"><span class="nav-text">安装 i18n</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%9B%BD%E9%99%85%E5%8C%96"><span class="nav-text">页面中使用国际化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#i18n-%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84-index-js-%E6%96%87%E4%BB%B6"><span class="nav-text">i18n 文件夹下的 index.js 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#main-js-%E5%BC%95%E5%85%A5"><span class="nav-text">main.js 引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA%E9%A1%B5%E9%9D%A2"><span class="nav-text">展示页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">语言配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%8F%9C%E5%8D%95%E5%9B%BD%E9%99%85%E5%8C%96"><span class="nav-text">路由菜单国际化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA%E9%A1%B5%E9%9D%A2%E4%B8%AD"><span class="nav-text">展示页面中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6"><span class="nav-text">配置语言文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="nav-text">路由表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Element-%E5%9B%BD%E9%99%85%E5%8C%96"><span class="nav-text">Element 国际化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#main-js-%E5%BC%95%E5%85%A5-1"><span class="nav-text">main.js 引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-1"><span class="nav-text">语言配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E5%8F%82%E8%80%83"><span class="nav-text">推荐参考</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85-i18n"><span class="nav-text">安装 i18n</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B5%E9%9D%A2%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%9B%BD%E9%99%85%E5%8C%96"><span class="nav-text">页面中使用国际化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#i18n-%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E7%9A%84-index-js-%E6%96%87%E4%BB%B6"><span class="nav-text">i18n 文件夹下的 index.js 文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#main-js-%E5%BC%95%E5%85%A5"><span class="nav-text">main.js 引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA%E9%A1%B5%E9%9D%A2"><span class="nav-text">展示页面</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-text">语言配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%8F%9C%E5%8D%95%E5%9B%BD%E9%99%85%E5%8C%96"><span class="nav-text">路由菜单国际化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B1%95%E7%A4%BA%E9%A1%B5%E9%9D%A2%E4%B8%AD"><span class="nav-text">展示页面中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E8%AF%AD%E8%A8%80%E6%96%87%E4%BB%B6"><span class="nav-text">配置语言文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E8%A1%A8"><span class="nav-text">路由表</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Element-%E5%9B%BD%E9%99%85%E5%8C%96"><span class="nav-text">Element 国际化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#main-js-%E5%BC%95%E5%85%A5-1"><span class="nav-text">main.js 引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AF%AD%E8%A8%80%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-1"><span class="nav-text">语言配置文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%A8%E8%8D%90%E5%8F%82%E8%80%83"><span class="nav-text">推荐参考</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
