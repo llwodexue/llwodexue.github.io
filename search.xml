@@ -1271,10 +1271,10 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+        <tag>数组</tag>
         <tag>封装</tag>
         <tag>常用数组方法</tag>
         <tag>数组返回值</tag>
-        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
@@ -1345,10 +1345,10 @@
       </categories>
       <tags>
         <tag>JavaScript</tag>
+        <tag>数组</tag>
         <tag>深拷贝</tag>
         <tag>浅拷贝</tag>
         <tag>ES6方法</tag>
-        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
@@ -2242,9 +2242,9 @@
         <category>前端插件</category>
       </categories>
       <tags>
+        <tag>CSS</tag>
         <tag>前端</tag>
         <tag>Swiper</tag>
-        <tag>CSS</tag>
       </tags>
   </entry>
   <entry>
