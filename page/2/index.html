@@ -186,7 +186,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/3792d7db/">
+    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/9fef765/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -200,7 +200,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/3792d7db/" class="post-title-link" itemprop="url">JS 原型继承</a>
+            <a href="/posts/9fef765/" class="post-title-link" itemprop="url">Vue 封装无限层级树形菜单组件（后台传的是扁平数组）</a>
         </h2>
 
         <div class="post-meta">
@@ -210,7 +210,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-12-04 00:52:47" itemprop="dateCreated datePublished" datetime="2020-12-04T00:52:47+08:00">2020-12-04</time>
+              <time title="创建时间：2021-04-22 11:05:10" itemprop="dateCreated datePublished" datetime="2021-04-22T11:05:10+08:00">2021-04-22</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -218,7 +218,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                  <a href="/categories/Vue/" itemprop="url" rel="index"><span itemprop="name">Vue</span></a>
                 </span>
             </span>
 
@@ -228,14 +228,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.6k</span>
+              <span>4.8k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -247,10 +247,113 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>继承机制使得不同的实例可以共享构造函数的原型对象的属性和方法</p>
+          <p>项目原因，需要把一个扁平/线性数组转换成树形数组（符合 el-tree 数据要求）</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> resData = [</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="string">&#x27;1&#x27;</span>, <span class="attr">label</span>: <span class="string">&#x27;动物&#x27;</span>, <span class="attr">parentId</span>: <span class="string">&#x27;&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;&#x27;</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="string">&#x27;2&#x27;</span>, <span class="attr">label</span>: <span class="string">&#x27;狗&#x27;</span>, <span class="attr">parentId</span>: <span class="string">&#x27;1&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;icon-chongwutubiao13&#x27;</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="string">&#x27;3&#x27;</span>, <span class="attr">label</span>: <span class="string">&#x27;哈士奇&#x27;</span>, <span class="attr">parentId</span>: <span class="string">&#x27;2&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;icon-hashiqi&#x27;</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="string">&#x27;4&#x27;</span>, <span class="attr">label</span>: <span class="string">&#x27;柯基&#x27;</span>, <span class="attr">parentId</span>: <span class="string">&#x27;2&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;icon-keji-&#x27;</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="string">&#x27;6&#x27;</span>, <span class="attr">label</span>: <span class="string">&#x27;猫&#x27;</span>, <span class="attr">parentId</span>: <span class="string">&#x27;1&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;icon-chongwutubiao04&#x27;</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="string">&#x27;7&#x27;</span>, <span class="attr">label</span>: <span class="string">&#x27;植物&#x27;</span>, <span class="attr">parentId</span>: <span class="string">&#x27;&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;&#x27;</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">id</span>: <span class="string">&#x27;8&#x27;</span>, <span class="attr">label</span>: <span class="string">&#x27;微生物&#x27;</span>, <span class="attr">parentId</span>: <span class="string">&#x27;&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;&#x27;</span> &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h2 id="JS-代码：扁平数组转换成树形数组"><a href="#JS-代码：扁平数组转换成树形数组" class="headerlink" title="JS 代码：扁平数组转换成树形数组"></a>JS 代码：扁平数组转换成树形数组</h2><ul>
+<li>直接上代码，不需要递归</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">transformData</span>(<span class="params">data</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 深拷贝一份（以防连续调用出错）</span></span><br><span class="line">  <span class="keyword">const</span> cData = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(data))</span><br><span class="line">  <span class="keyword">const</span> map = &#123;&#125;</span><br><span class="line">  <span class="keyword">const</span> tData = []</span><br><span class="line">  <span class="comment">// 注意：这里item的引用地址指向cData</span></span><br><span class="line">  cData.forEach(<span class="function"><span class="params">item</span> =&gt;</span> (map[item.id] = item))</span><br><span class="line">  cData.forEach(<span class="function"><span class="params">child</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> mapItem = map[child.parentId]</span><br><span class="line">    <span class="keyword">if</span> (mapItem) &#123;</span><br><span class="line">      <span class="comment">// 注意：这里mapItem引用地址指向也是指向cData</span></span><br><span class="line">      <span class="keyword">if</span> (!mapItem.children) mapItem.children = []</span><br><span class="line">      mapItem.children.push(child)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 顶级节点</span></span><br><span class="line">      tData.push(child)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  <span class="keyword">return</span> tData</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="项目应用：el-tree-制作一个树形多级嵌套菜单栏"><a href="#项目应用：el-tree-制作一个树形多级嵌套菜单栏" class="headerlink" title="项目应用：el-tree 制作一个树形多级嵌套菜单栏"></a>项目应用：el-tree 制作一个树形多级嵌套菜单栏</h2><p>实现效果：</p>
+<p><img data-src="https://img-blog.csdnimg.cn/img_convert/fd270ef62d9c02db91a340ae0b0a173f.png"></p>
+<ul>
+<li>Vue 代码</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">el-scrollbar</span> <span class="attr">wrap-class</span>=<span class="string">&quot;scrollbar-wrapper&quot;</span> <span class="attr">style</span>=<span class="string">&quot;height: 100%&quot;</span>&gt;</span></span><br><span class="line">    &lt;el-tree</span><br><span class="line">      ref=&quot;tree&quot;</span><br><span class="line">      v-loading=&quot;treeDataLoading&quot;</span><br><span class="line">      node-key=&quot;id&quot;</span><br><span class="line">      :data=&quot;treeData&quot;</span><br><span class="line">      :show-checkbox=&quot;showCheckBox&quot;</span><br><span class="line">      :default-expand-all=&quot;defaultExpandAll&quot;</span><br><span class="line">      style=&quot;height: 100%; padding-bottom: 20px&quot;</span><br><span class="line">    &gt;</span><br><span class="line">      <span class="tag">&lt;<span class="name">span</span> <span class="attr">slot-scope</span>=<span class="string">&quot;&#123; node, data &#125;&quot;</span> <span class="attr">class</span>=<span class="string">&quot;custom-tree-node&quot;</span>&gt;</span></span><br><span class="line">        &#123;&#123; node.label &#125;&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">template</span> <span class="attr">v-if</span>=<span class="string">&quot;data.icon&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">el-tooltip</span> <span class="attr">effect</span>=<span class="string">&quot;dark&quot;</span> <span class="attr">:content</span>=<span class="string">&quot;data.label&quot;</span> <span class="attr">placement</span>=<span class="string">&quot;top-start&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">i</span> <span class="attr">:class</span>=<span class="string">&quot;[&#x27;iconfont&#x27;, data.icon]&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">i</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">el-tooltip</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">el-tree</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">el-scrollbar</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">  props: &#123;</span><br><span class="line"><span class="javascript">    <span class="comment">// 节点是否可被选择（显示前面的复选框）</span></span></span><br><span class="line">    showCheckBox: &#123;</span><br><span class="line"><span class="javascript">      type: <span class="built_in">Boolean</span>,</span></span><br><span class="line"><span class="javascript">      <span class="keyword">default</span>: <span class="literal">false</span>,</span></span><br><span class="line">    &#125;,</span><br><span class="line"><span class="javascript">    <span class="comment">// 是否默认展开所有节点</span></span></span><br><span class="line">    defaultExpandAll: &#123;</span><br><span class="line"><span class="javascript">      type: <span class="built_in">Boolean</span>,</span></span><br><span class="line"><span class="javascript">      <span class="keyword">default</span>: <span class="literal">false</span>,</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line"><span class="javascript">  <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">return</span> &#123;</span></span><br><span class="line">      treeData: [],</span><br><span class="line"><span class="javascript">      treeDataLoading: <span class="literal">false</span>,</span></span><br><span class="line">      resData: [</span><br><span class="line"><span class="javascript">        &#123; <span class="attr">id</span>: <span class="string">&#x27;1&#x27;</span>, <span class="attr">label</span>: <span class="string">&#x27;动物&#x27;</span>, <span class="attr">parentId</span>: <span class="string">&#x27;&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;&#x27;</span> &#125;,</span></span><br><span class="line"><span class="javascript">        &#123; <span class="attr">id</span>: <span class="string">&#x27;2&#x27;</span>, <span class="attr">label</span>: <span class="string">&#x27;狗&#x27;</span>, <span class="attr">parentId</span>: <span class="string">&#x27;1&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;icon-chongwutubiao13&#x27;</span> &#125;,</span></span><br><span class="line"><span class="javascript">        &#123; <span class="attr">id</span>: <span class="string">&#x27;3&#x27;</span>, <span class="attr">label</span>: <span class="string">&#x27;哈士奇&#x27;</span>, <span class="attr">parentId</span>: <span class="string">&#x27;2&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;icon-hashiqi&#x27;</span> &#125;,</span></span><br><span class="line"><span class="javascript">        &#123; <span class="attr">id</span>: <span class="string">&#x27;4&#x27;</span>, <span class="attr">label</span>: <span class="string">&#x27;柯基&#x27;</span>, <span class="attr">parentId</span>: <span class="string">&#x27;2&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;icon-keji-&#x27;</span> &#125;,</span></span><br><span class="line"><span class="javascript">        &#123; <span class="attr">id</span>: <span class="string">&#x27;6&#x27;</span>, <span class="attr">label</span>: <span class="string">&#x27;猫&#x27;</span>, <span class="attr">parentId</span>: <span class="string">&#x27;1&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;icon-chongwutubiao04&#x27;</span> &#125;,</span></span><br><span class="line"><span class="javascript">        &#123; <span class="attr">id</span>: <span class="string">&#x27;7&#x27;</span>, <span class="attr">label</span>: <span class="string">&#x27;植物&#x27;</span>, <span class="attr">parentId</span>: <span class="string">&#x27;&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;&#x27;</span> &#125;,</span></span><br><span class="line"><span class="javascript">        &#123; <span class="attr">id</span>: <span class="string">&#x27;8&#x27;</span>, <span class="attr">label</span>: <span class="string">&#x27;微生物&#x27;</span>, <span class="attr">parentId</span>: <span class="string">&#x27;&#x27;</span>, <span class="attr">icon</span>: <span class="string">&#x27;&#x27;</span> &#125;,</span></span><br><span class="line">      ],</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  methods: &#123;</span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">init</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">this</span>.treeDataLoading = <span class="literal">true</span></span></span><br><span class="line"><span class="javascript">      <span class="comment">// 发送数据请求（这里不发送请求以resData模拟）</span></span></span><br><span class="line"><span class="javascript">      <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> tree = <span class="built_in">this</span>.resData</span></span><br><span class="line"><span class="javascript">        <span class="built_in">this</span>.treeData = <span class="built_in">this</span>.transformData(tree)</span></span><br><span class="line">        res()</span><br><span class="line">      &#125;)</span><br><span class="line"><span class="javascript">        .catch(<span class="function">() =&gt;</span> &#123;&#125;)</span></span><br><span class="line"><span class="javascript">        .finally(<span class="function">() =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">          <span class="built_in">this</span>.treeDataLoading = <span class="literal">false</span></span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">transformData</span>(<span class="params">data, params = &#123;&#125;</span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> cData = <span class="built_in">JSON</span>.parse(<span class="built_in">JSON</span>.stringify(data))</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> map = &#123;&#125;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> tData = []</span></span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> attr = &#123;</span></span><br><span class="line"><span class="javascript">        id: <span class="string">&#x27;id&#x27;</span>,</span></span><br><span class="line"><span class="javascript">        parentId: <span class="string">&#x27;parentId&#x27;</span>,</span></span><br><span class="line">      &#125;</span><br><span class="line"><span class="javascript">      <span class="keyword">const</span> arg = <span class="built_in">Object</span>.assign(&#123;&#125;, attr, params)</span></span><br><span class="line"><span class="javascript">      cData.forEach(<span class="function"><span class="params">item</span> =&gt;</span> (map[item[arg.id]] = item))</span></span><br><span class="line"><span class="javascript">      cData.forEach(<span class="function"><span class="params">child</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">const</span> mapItem = map[child[arg.parentId]]</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (mapItem) &#123;</span></span><br><span class="line"><span class="javascript">          <span class="keyword">if</span> (!mapItem.children) mapItem.children = []</span></span><br><span class="line">          mapItem.children.push(child)</span><br><span class="line"><span class="javascript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line">          tData.push(child)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> tData</span></span><br><span class="line">    &#125;,</span><br><span class="line"><span class="javascript">    <span class="comment">// 全选</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">checkAll</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">this</span>.$refs.tree.setCheckedNodes(<span class="built_in">this</span>.treeData)</span></span><br><span class="line">    &#125;,</span><br><span class="line"><span class="javascript">    <span class="comment">// 取消全选</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">cancelAll</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">this</span>.$refs.tree.setCheckedKeys([])</span></span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">&quot;less&quot;</span> <span class="attr">scoped</span>&gt;</span></span><br><span class="line"><span class="css"><span class="selector-class">.scrollbar-wrapper</span> &#123;</span></span><br><span class="line">  overflow-x: hidden !important;</span><br><span class="line">&#125;</span><br><span class="line"><span class="css"><span class="selector-class">.custom-tree-node</span> &#123;</span></span><br><span class="line">  font-size: 16px;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="父组件调用"><a href="#父组件调用" class="headerlink" title="父组件调用"></a>父组件调用</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">tree-select</span> <span class="attr">ref</span>=<span class="string">&quot;tree&quot;</span> <span class="attr">defaultExpandAll</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> TreeSelect <span class="keyword">from</span> <span class="string">&#x27;./components/TreeSelect&#x27;</span></span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line">  components: &#123;</span><br><span class="line">    TreeSelect,</span><br><span class="line">  &#125;,</span><br><span class="line"><span class="javascript">  <span class="function"><span class="title">mounted</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">    <span class="built_in">this</span>.$refs[<span class="string">&#x27;tree&#x27;</span>].init()</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="还可以参考这篇文章，他使用的双-filter"><a href="#还可以参考这篇文章，他使用的双-filter" class="headerlink" title="还可以参考这篇文章，他使用的双 filter"></a>还可以参考这篇文章，他使用的双 filter</h2><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mr_JavaScript/article/details/82817177">js 实现无限层级树形数据结构（创新算法）</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		  
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/bb3fd12a/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="LiLyn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="奇幻的梦之旅">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/bb3fd12a/" class="post-title-link" itemprop="url">Yapi安装部署（接口管理服务）</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-30 17:05:20" itemprop="dateCreated datePublished" datetime="2020-12-30T17:05:20+08:00">2020-12-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">基础配置</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong><code>Yapi</code></strong> 由 <code>YMFE</code>开源，旨在为开发、产品、测试人员提供更优雅的接口管理服务，可以帮助开发者轻松创建、发布、维护<code>API</code>。</p>
+<p>官方文档：<a target="_blank" rel="noopener" href="https://hellosean1025.github.io/yapi/devops/index.html">https://hellosean1025.github.io/yapi/devops/index.html</a></p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/3792d7db/#more" rel="contents">
+              <a class="btn" href="/posts/bb3fd12a/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -278,7 +381,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/5d2789f/">
+    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/3c79077c/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -292,7 +395,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/5d2789f/" class="post-title-link" itemprop="url">JS 检测数据类型的四种方式</a>
+            <a href="/posts/3c79077c/" class="post-title-link" itemprop="url">检测公有属性的封装</a>
         </h2>
 
         <div class="post-meta">
@@ -302,7 +405,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-12-03 20:52:23" itemprop="dateCreated datePublished" datetime="2020-12-03T20:52:23+08:00">2020-12-03</time>
+              <time title="创建时间：2020-12-28 15:58:49" itemprop="dateCreated datePublished" datetime="2020-12-28T15:58:49+08:00">2020-12-28</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -320,7 +423,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>3.6k</span>
+              <span>3.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -339,16 +442,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>JavaScript 有八种数据类型：</p>
-<p>基本数据类型：Boolean、Number、String、null、undefined、Symbol(ES6新增)、BigInt（ES2020引入）</p>
-<p>引用数据类型：Object</p>
-<blockquote>
-<p>Symbol：表示独一无二的值</p>
-<p>BigInt：用来解决 JavaScript 中数字只能到 53 个二进制位，大于这个范围的整数，无法精确表示</p>
-</blockquote>
+          <p>检测公有属性方法用 in+hasOwnProperty 结合会有一些弊端，比如：某个属性既是私有的，也是公有的，就检测不出来了。使用 Object.getPrototypeOf+hasOwnProperty 可以准确检测</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/5d2789f/#more" rel="contents">
+              <a class="btn" href="/posts/3c79077c/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -376,7 +473,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/f356c3f6/">
+    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/399b5a63/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -390,7 +487,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/f356c3f6/" class="post-title-link" itemprop="url">JS 设计模式浅析</a>
+            <a href="/posts/399b5a63/" class="post-title-link" itemprop="url">JS 实现图片延迟加载（懒加载）</a>
         </h2>
 
         <div class="post-meta">
@@ -400,7 +497,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-12-03 17:01:38" itemprop="dateCreated datePublished" datetime="2020-12-03T17:01:38+08:00">2020-12-03</time>
+              <time title="创建时间：2020-12-20 22:39:21" itemprop="dateCreated datePublished" datetime="2020-12-20T22:39:21+08:00">2020-12-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -418,14 +515,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
+              <span>5.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -437,13 +534,109 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <blockquote>
-<p>设计模式：在面向对象软件设计过程中针对特定问题的简洁而优雅的解决方案</p>
-</blockquote>
-<p>一般来说，设计模式（Pattern Design）就是<strong>创建不同类型的对象的套路</strong></p>
+          <h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><ol>
+<li>结构中，我们使用一个盒子包裹着图片（图片不显示的时候，可以先占据着这个位置，并且设置默认背景图或背景颜色）</li>
+<li>最开始，img 的 src 设置默认背景图，并把图片真实地址放到自定义属性中（比如：data-src ）</li>
+<li>当 JS 监听到该图片元素进入可视窗口时，将自定义属性中的地址放到 src 属性中，达到懒加载效果</li>
+</ol>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/f356c3f6/#more" rel="contents">
+              <a class="btn" href="/posts/399b5a63/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+	<div>
+		  
+	</div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/d2addf30/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/logo.jpg">
+      <meta itemprop="name" content="LiLyn">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="奇幻的梦之旅">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/posts/d2addf30/" class="post-title-link" itemprop="url">JS实现商城排序</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-12-20 19:38:43" itemprop="dateCreated datePublished" datetime="2020-12-20T19:38:43+08:00">2020-12-20</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>10k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>9 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h2><ul>
+<li>根据上架时间/热度/价格进行升序/降序排序</li>
+<li>上箭头亮代表升序，下箭头亮代表降序</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/posts/d2addf30/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -485,7 +678,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/ea5004b1/" class="post-title-link" itemprop="url">JS this指向问题</a>
+            <a href="/posts/ea5004b1/" class="post-title-link" itemprop="url">JS中出现undefined和null情况</a>
         </h2>
 
         <div class="post-meta">
@@ -495,7 +688,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-12-01 19:55:29" itemprop="dateCreated datePublished" datetime="2020-12-01T19:55:29+08:00">2020-12-01</time>
+              <time title="创建时间：2020-12-20 16:34:24" itemprop="dateCreated datePublished" datetime="2020-12-20T16:34:24+08:00">2020-12-20</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -513,14 +706,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.6k</span>
+              <span>946</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>1 分钟</span>
             </span>
 
         </div>
@@ -532,7 +725,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>在绝大多数情况下，函数的调用方式决定了 <code>this</code> 的值。<code>this</code> 不能在执行期间被赋值，并且在每次函数被调用时 <code>this</code> 的值也可能会不同，所以总结 <code>this</code> 值的规律是有必要的</p>
+          <p>undefined：未定义</p>
+<p>null：空值</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/posts/ea5004b1/#more" rel="contents">
@@ -563,7 +757,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/3344fd09/">
+    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/6362a5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -577,7 +771,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/3344fd09/" class="post-title-link" itemprop="url">JS 垃圾回收与性能优化</a>
+            <a href="/posts/6362a5/" class="post-title-link" itemprop="url">jQuery 源码浅析</a>
         </h2>
 
         <div class="post-meta">
@@ -587,7 +781,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-29 21:50:15" itemprop="dateCreated datePublished" datetime="2020-11-29T21:50:15+08:00">2020-11-29</time>
+              <time title="创建时间：2020-12-19 20:53:33" itemprop="dateCreated datePublished" datetime="2020-12-19T20:53:33+08:00">2020-12-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -605,14 +799,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
+              <span>3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -624,10 +818,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>JavaScript 通过自动内存管理实现内存分配和闲置资源回收，基本思路：确定哪个变量不会再使用，然后释放它占用的内存。这个过程是周期性的，即垃圾回收程序每隔一定时间就会自动运行。但是某块内是否还有用，属于“不可判断的”问题，意味着靠算法是解决不了的</p>
+          <p>从闭包应用和冲突处理两方面浅析jQuery源码</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/3344fd09/#more" rel="contents">
+              <a class="btn" href="/posts/6362a5/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -655,7 +849,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/6669e648/">
+    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/17652c6a/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -669,7 +863,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/6669e648/" class="post-title-link" itemprop="url">圣杯布局和双飞翼布局</a>
+            <a href="/posts/17652c6a/" class="post-title-link" itemprop="url">JS 实现轮播图（附jQuery版本）</a>
         </h2>
 
         <div class="post-meta">
@@ -679,7 +873,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-29 15:02:56" itemprop="dateCreated datePublished" datetime="2020-11-29T15:02:56+08:00">2020-11-29</time>
+              <time title="创建时间：2020-12-19 19:55:21" itemprop="dateCreated datePublished" datetime="2020-12-19T19:55:21+08:00">2020-12-19</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -687,7 +881,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/CSS/" itemprop="url" rel="index"><span itemprop="name">CSS</span></a>
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
                 </span>
             </span>
 
@@ -697,14 +891,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.9k</span>
+              <span>9.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
+              <span>8 分钟</span>
             </span>
 
         </div>
@@ -716,15 +910,17 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>圣杯布局和双飞翼布局，虽然两者的实现方法略有差异，不过都遵循了以下要点：</p>
-<ul>
-<li>两侧宽度固定，中间宽度自适应</li>
-<li>中间部分在 DOM 结构上优先，以便先行渲染</li>
-<li>允许三列中的任意一列成为最高列</li>
+          <h3 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h3><ul>
+<li>多张图片自动轮播展示，对应分页器（小圆点）高亮显示</li>
+<li>点击分页器（小圆点）切换对应图片</li>
+<li>点击前进/后退按钮切换当前图片的前一张/后一张图片</li>
+<li>图片无缝切换，第一张图片和最后一张图片无缝切换</li>
+<li>鼠标滑入停止图片切换，鼠标移出开始图片切换</li>
+<li>前进后退按钮防抖</li>
 </ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/6669e648/#more" rel="contents">
+              <a class="btn" href="/posts/17652c6a/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -752,7 +948,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/5a7a946b/">
+    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/f0469b23/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -766,7 +962,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/5a7a946b/" class="post-title-link" itemprop="url">获取文件夹下所有图片尺寸</a>
+            <a href="/posts/f0469b23/" class="post-title-link" itemprop="url">JS 类数组转数组的四种方法</a>
         </h2>
 
         <div class="post-meta">
@@ -776,7 +972,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-27 18:44:47" itemprop="dateCreated datePublished" datetime="2020-11-27T18:44:47+08:00">2020-11-27</time>
+              <time title="创建时间：2020-12-13 14:57:10" itemprop="dateCreated datePublished" datetime="2020-12-13T14:57:10+08:00">2020-12-13</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -784,7 +980,7 @@
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                  <a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
                 </span>
             </span>
 
@@ -794,7 +990,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
+              <span>969</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -813,13 +1009,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>有时候我们爬取了一堆图片，需要知道这些图片尺寸大小或名字以便日后处理。一个一个弄很是费劲，我们可以用 python 批量获取一下并生成 csv</p>
-<ul>
-<li>如果图片后缀比较多（png jpg jpeg bmp），可以在 suffix里进行添加</li>
-</ul>
+          <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li>for 循环</li>
+<li>[].slice.call() （calll方法：[].map.call()）</li>
+<li>ES6语法：Array.from()</li>
+<li>ES6语法：展开运算符</li>
+</ol>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/5a7a946b/#more" rel="contents">
+              <a class="btn" href="/posts/f0469b23/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -847,7 +1045,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/ea26882a/">
+    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/995105eb/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/logo.jpg">
@@ -861,7 +1059,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/posts/ea26882a/" class="post-title-link" itemprop="url">JS 变量提升</a>
+            <a href="/posts/995105eb/" class="post-title-link" itemprop="url">原生 JS 封装数组方法</a>
         </h2>
 
         <div class="post-meta">
@@ -871,7 +1069,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-24 20:00:24" itemprop="dateCreated datePublished" datetime="2020-11-24T20:00:24+08:00">2020-11-24</time>
+              <time title="创建时间：2020-12-09 21:06:24" itemprop="dateCreated datePublished" datetime="2020-12-09T21:06:24+08:00">2020-12-09</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -889,14 +1087,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>4.4k</span>
+              <span>7.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -908,203 +1106,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>当浏览器开辟出供 js 执行的栈内存之后，代码并不是立即自上而下执行，而是需要先做一些事情：把当前作用域中带 var 和 function 的关键字进行提前的声明和定义（变量提升）</p>
-<ul>
-<li>var：只声明，未定义（不赋值）</li>
-<li>function：声明和定义（赋值）一起完成</li>
-</ul>
+          <p>用原生JS 封装数组操作、重排、位置、迭代等方法。首先需要知道对该方法返回值以及是否改变原数组，接下来再看一下简单思路，最后看封装代码</p>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/posts/ea26882a/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		  
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/bf596df5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="LiLyn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="奇幻的梦之旅">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/bf596df5/" class="post-title-link" itemprop="url">牛客网本地刷题环境部署</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-11-22 23:04:57" itemprop="dateCreated datePublished" datetime="2020-11-22T23:04:57+08:00">2020-11-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">基础配置</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>牛客网在线判题系统使用帮助：<a target="_blank" rel="noopener" href="https://www.nowcoder.com/discuss/276">https://www.nowcoder.com/discuss/276</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/bf596df5/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-	<div>
-		  
-	</div>
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://llmysnow.top/posts/fc53734b/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/logo.jpg">
-      <meta itemprop="name" content="LiLyn">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="奇幻的梦之旅">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/posts/fc53734b/" class="post-title-link" itemprop="url">vscode造成电脑卡顿</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-11-22 22:55:13" itemprop="dateCreated datePublished" datetime="2020-11-22T22:55:13+08:00">2020-11-22</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9F%BA%E7%A1%80%E9%85%8D%E7%BD%AE/" itemprop="url" rel="index"><span itemprop="name">基础配置</span></a>
-                </span>
-            </span>
-
-          <br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>581</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="主流解决方案"><a href="#主流解决方案" class="headerlink" title="主流解决方案"></a>主流解决方案</h3><p>最近使用 Vscode 总是特别卡顿，网上大部分的解决方案如下（但是没有什么效果）</p>
-<ul>
-<li>search.followSymlinksd: false （控制是否在搜索中跟踪符号链接）</li>
-<li>git.enabled: false （是否启用Git）</li>
-<li>git.autorefresh: false （是否启用自动刷新）</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/posts/fc53734b/#more" rel="contents">
+              <a class="btn" href="/posts/995105eb/">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1131,7 +1136,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1199,20 +1204,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1269,12 +1274,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">85k</span>
+    <span title="站点总字数">124k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:18</span>
+    <span title="站点阅读时长">1:53</span>
 </div>
 
 <!--

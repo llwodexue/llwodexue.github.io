@@ -28,7 +28,7 @@
 <meta property="og:description" content="设计模式：在面向对象软件设计过程中针对特定问题的简洁而优雅的解决方案  一般来说，设计模式（Pattern Design）就是创建不同类型的对象的套路">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2020-12-03T09:01:38.729Z">
-<meta property="article:modified_time" content="2020-12-03T16:57:42.527Z">
+<meta property="article:modified_time" content="2021-01-28T14:41:22.015Z">
 <meta property="article:author" content="LiLyn">
 <meta property="article:tag" content="JavaScript">
 <meta property="article:tag" content="设计模式">
@@ -234,14 +234,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
+              <span>2.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -291,6 +291,25 @@
 <p>构造函数模式：利用构造函数的方式创建对象。函数执行是，前面一旦加了 new，就变成构造函数</p>
 </blockquote>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name;</span><br><span class="line">    <span class="built_in">this</span>.age = age;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.sayName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> f = <span class="keyword">new</span> Person(<span class="string">&quot;cat&quot;</span>, <span class="number">17</span>);</span><br><span class="line">f.sayName();</span><br></pre></td></tr></table></figure>
+
+<h2 id="发布订阅"><a href="#发布订阅" class="headerlink" title="发布订阅"></a>发布订阅</h2><p>DOM 0级事件和DOM 2级事件区别：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">box.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</span><br><span class="line">box.addEventListener(<span class="string">&quot;click&quot;</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>DOM 0级就是给元素的某个属性绑定方法（有效绑定的方法只有一个）</li>
+<li>DOM 2级是基于事件池机制完成，每增加一个绑定的方法，都会往事件池中存放一个…当事件池触发会依次执行事件池的事情（发布订阅其实就是模拟事件池机制）</li>
+</ul>
+<p>DOM 2级事件池机制：</p>
+<ol>
+<li>基于addEventListener/attachEvent（IE6<del>8）向事件池中追加方法 ：新版浏览器会根据元素和事件类型对新增的方法做重复校验，但是IE6</del>8不可以</li>
+<li>当事件行为触发，会把事件池中的方法按照增加的顺序依次执行，但是IE6~8中执行的顺序是不固定的</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> _subscribe = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Sub：发布订阅类</span></span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Sub</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="title">constructor</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">            <span class="comment">// 创建一个事件池，用来存储后期需要的方法</span></span><br><span class="line">            <span class="built_in">this</span>.$pond = [];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 向事件池中追加方法（重复校验）</span></span><br><span class="line">        <span class="function"><span class="title">add</span>(<span class="params">func</span>)</span> &#123;</span><br><span class="line">            <span class="keyword">let</span> flag = <span class="built_in">this</span>.$pond.some(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> item === func;</span><br><span class="line">            &#125;);</span><br><span class="line">            !flag ? <span class="built_in">this</span>.$pond.push(func) : <span class="literal">null</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 从事件池中移除方法</span></span><br><span class="line">        <span class="function"><span class="title">remove</span>(<span class="params">func</span>)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.$pond = <span class="built_in">this</span>.$pond.filter(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> item !== func;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// 通知事件池中的方法，按照顺序依次执行</span></span><br><span class="line">        <span class="function"><span class="title">fire</span>(<span class="params">...args</span>)</span> &#123;</span><br><span class="line">            <span class="built_in">this</span>.$pond.forEach(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">                <span class="comment">// 在三个参数以上，call性能略优于apply</span></span><br><span class="line">                item.call(<span class="built_in">this</span>, ...args);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">subscribe</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Sub();</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如果要使用for循环，需要考虑数组塌陷问题</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从事件池中移除方法</span></span><br><span class="line"><span class="function"><span class="title">remove</span>(<span class="params">func</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> $pond = <span class="built_in">this</span>.$pond;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; $pond.length; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> item = $pond[i];</span><br><span class="line">        <span class="keyword">if</span> (item === func) &#123;</span><br><span class="line">            $pond[i] = <span class="literal">null</span>;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 通知事件池中的方法，按照顺序依次执行</span></span><br><span class="line"><span class="function"><span class="title">fire</span>(<span class="params">...args</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">let</span> $pond = <span class="built_in">this</span>.$pond;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; $pond.length; i++) &#123;</span><br><span class="line">        <span class="keyword">let</span> item = $pond[i];</span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> item !== <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">            $pond.splice(i, <span class="number">1</span>);</span><br><span class="line">            i--;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        item.call(<span class="built_in">this</span>, ...args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
     </div>
@@ -430,7 +449,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-text">单例模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E7%AE%80%E5%86%99%E6%B3%95"><span class="nav-text">极简写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AD%E5%8C%85%E6%96%B9%E5%BC%8F"><span class="nav-text">闭包方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-text">工厂模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E6%A8%A1%E5%BC%8F"><span class="nav-text">构造函数模式</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8D%95%E4%BE%8B%E6%A8%A1%E5%BC%8F"><span class="nav-text">单例模式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E7%AE%80%E5%86%99%E6%B3%95"><span class="nav-text">极简写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AD%E5%8C%85%E6%96%B9%E5%BC%8F"><span class="nav-text">闭包方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B7%A5%E5%8E%82%E6%A8%A1%E5%BC%8F"><span class="nav-text">工厂模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E6%A8%A1%E5%BC%8F"><span class="nav-text">构造函数模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%91%E5%B8%83%E8%AE%A2%E9%98%85"><span class="nav-text">发布订阅</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -446,20 +465,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">24</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">64</span>
+        <span class="site-state-item-count">89</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -516,12 +535,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">85k</span>
+    <span title="站点总字数">124k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1:18</span>
+    <span title="站点阅读时长">1:53</span>
 </div>
 
 <!--
