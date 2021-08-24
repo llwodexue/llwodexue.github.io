@@ -9,6 +9,8 @@
 <li>回显只显示其姓名</li>
 <li>选择框切换时父组件需要能拿到对应名字的一整行数据</li>
 </ol>
+<a id="more"></a>
+
 <p>如图：</p>
 <p><img data-src="https://gitee.com/lilyn/pic/raw/master/js-img/%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A1%A8%E6%A0%BC%E7%9A%84%E9%80%89%E6%8B%A9%E6%A1%86.gif"></p>
 <h2 id="问题分析："><a href="#问题分析：" class="headerlink" title="问题分析："></a>问题分析：</h2><p>需求其实很简单，主要利用 <code>v-model</code> 里的 <code>@input</code> 控制其回显和 <code>@change</code> 找到对应行的数据，这里主要说一下可能出现的问题：</p>
