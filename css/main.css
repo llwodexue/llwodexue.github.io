@@ -90,12 +90,12 @@ textarea {
 }
 button,
 input {
-/* 1 */
+  /* 1 */
   overflow: visible;
 }
 button,
 select {
-/* 1 */
+  /* 1 */
   text-transform: none;
 }
 button,
@@ -177,7 +177,7 @@ body {
 body {
   background: var(--body-bg-color);
   color: var(--text-color);
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Lato', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-size: 1em;
   line-height: 2;
 }
@@ -193,7 +193,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Lato', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-weight: bold;
   line-height: 1.5;
   margin: 20px 0 15px;
@@ -243,7 +243,13 @@ video {
   max-width: 100%;
 }
 hr {
-  background-image: repeating-linear-gradient(-45deg, #ddd, #ddd 4px, transparent 4px, transparent 8px);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    #ddd,
+    #ddd 4px,
+    transparent 4px,
+    transparent 8px
+  );
   border: 0;
   height: 3px;
   margin: 40px 0;
@@ -270,7 +276,7 @@ kbd {
   background-image: linear-gradient(#eee, #fff, #eee);
   border: 1px solid #ccc;
   border-radius: 0.2em;
-  box-shadow: 0.1em 0.1em 0.2em rgba(0,0,0,0.1);
+  box-shadow: 0.1em 0.1em 0.2em rgba(0, 0, 0, 0.1);
   color: #555;
   font-family: inherit;
   padding: 0.1em 0.3em;
@@ -416,7 +422,7 @@ pre {
 }
 pre,
 code {
-  font-family: consolas, Menlo, monospace, "PingFang SC", "Microsoft YaHei";
+  font-family: consolas, Menlo, monospace, 'PingFang SC', 'Microsoft YaHei';
 }
 code {
   background: #eee;
@@ -1010,7 +1016,7 @@ pre .javascript .function {
   color: var(--brand-hover-color);
 }
 .site-title {
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Lato', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-size: 1.375em;
   font-weight: normal;
   margin: 0;
@@ -1186,23 +1192,23 @@ pre .javascript .function {
   max-width: 120px;
   height: $site-author-image-height;
   border: 1px solid #eee;
-/* 头像圆形 */
+  /* 头像圆形 */
   border-radius: 80px;
   -webkit-border-radius: 80px;
   -moz-border-radius: 80px;
   box-shadow: inset 0 -1px 0 #333 sf;
-/* 设置循环动画 [animation: (play)动画名称 (2s)动画播放时长单位秒或微秒 (ase-out)动画播放的速度曲线为以低速结束 
+  /* 设置循环动画 [animation: (play)动画名称 (2s)动画播放时长单位秒或微秒 (ase-out)动画播放的速度曲线为以低速结束 
     (1s)等待1秒然后开始动画 (1)动画播放次数(infinite为循环播放) ]*/
-/* 鼠标经过头像旋转360度 */
+  /* 鼠标经过头像旋转360度 */
   -webkit-transition: -webkit-transform 1s ease-out;
   -moz-transition: -moz-transform 1s ease-out;
   transition: transform 1s ease-out;
 }
-img:hover {
-/* 鼠标经过停止头像旋转 
+.site-author-image:hover {
+  /* 鼠标经过停止头像旋转 
   -webkit-animation-play-state:paused;
   animation-play-state:paused;*/
-/* 鼠标经过头像旋转360度 */
+  /* 鼠标经过头像旋转360度 */
   -webkit-transform: rotateZ(360deg);
   -moz-transform: rotateZ(360deg);
   transform: rotateZ(360deg);
@@ -1521,58 +1527,82 @@ img:hover {
   display: inline-block;
 }
 @-moz-keyframes iconAnimate {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
-  10%, 30% {
+  10%,
+  30% {
     transform: scale(0.9);
   }
-  20%, 40%, 60%, 80% {
+  20%,
+  40%,
+  60%,
+  80% {
     transform: scale(1.1);
   }
-  50%, 70% {
+  50%,
+  70% {
     transform: scale(1.1);
   }
 }
 @-webkit-keyframes iconAnimate {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
-  10%, 30% {
+  10%,
+  30% {
     transform: scale(0.9);
   }
-  20%, 40%, 60%, 80% {
+  20%,
+  40%,
+  60%,
+  80% {
     transform: scale(1.1);
   }
-  50%, 70% {
+  50%,
+  70% {
     transform: scale(1.1);
   }
 }
 @-o-keyframes iconAnimate {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
-  10%, 30% {
+  10%,
+  30% {
     transform: scale(0.9);
   }
-  20%, 40%, 60%, 80% {
+  20%,
+  40%,
+  60%,
+  80% {
     transform: scale(1.1);
   }
-  50%, 70% {
+  50%,
+  70% {
     transform: scale(1.1);
   }
 }
 @keyframes iconAnimate {
-  0%, 100% {
+  0%,
+  100% {
     transform: scale(1);
   }
-  10%, 30% {
+  10%,
+  30% {
     transform: scale(0.9);
   }
-  20%, 40%, 60%, 80% {
+  20%,
+  40%,
+  60%,
+  80% {
     transform: scale(1.1);
   }
-  50%, 70% {
+  50%,
+  70% {
     transform: scale(1.1);
   }
 }
@@ -1610,7 +1640,7 @@ img:hover {
   }
 }
 .post-body {
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Lato', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   overflow-wrap: break-word;
   word-wrap: break-word;
 }
@@ -1918,7 +1948,7 @@ img:hover {
 }
 .posts-expand .post-meta {
   color: #999;
-  font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-family: 'Lato', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   font-size: 0.75em;
   margin: 3px 0 60px 0;
   text-align: center;
@@ -2080,7 +2110,7 @@ img:hover {
   font-size: 0.8rem;
   line-height: 1.6em;
   word-break: break-all;
-  background: rgba(128,128,128,0.1);
+  background: rgba(128, 128, 128, 0.1);
 }
 .my_post_copyright .box-left {
   width: 15%;
@@ -2326,7 +2356,7 @@ ul.breadcrumb li + li:last-child {
   color: var(--link-hover-color) !important;
 }
 .search-pop-overlay {
-  background: rgba(0,0,0,0);
+  background: rgba(0, 0, 0, 0);
   height: 100%;
   left: 0;
   position: fixed;
@@ -2337,7 +2367,7 @@ ul.breadcrumb li + li:last-child {
   z-index: 1400;
 }
 .search-pop-overlay.search-active {
-  background: rgba(0,0,0,0.3);
+  background: rgba(0, 0, 0, 0.3);
   transition: background 0.2s;
   visibility: visible;
 }
@@ -2448,7 +2478,8 @@ ul.breadcrumb li + li:last-child {
 .header-inner {
   background: var(--content-bg-color);
   border-radius: initial;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
   overflow: hidden;
   padding: 0;
   position: absolute;
@@ -2481,7 +2512,8 @@ ul.breadcrumb li + li:last-child {
 .content-wrap {
   background: var(--content-bg-color);
   border-radius: initial;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
   box-sizing: border-box;
   padding: 40px;
   width: calc(100% - 252px);
@@ -2517,7 +2549,7 @@ ul.breadcrumb li + li:last-child {
 }
 @media (max-width: 991px) {
   .site-brand-container {
-    box-shadow: 0 0 16px rgba(0,0,0,0.5);
+    box-shadow: 0 0 16px rgba(0, 0, 0, 0.5);
   }
 }
 .site-meta {
@@ -2580,7 +2612,7 @@ ul.breadcrumb li + li:last-child {
   color: #fff;
   float: right;
   padding: 2px 5px;
-  text-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
   vertical-align: middle;
 }
 .main-menu .menu-item-active a::after {
@@ -2639,7 +2671,8 @@ ul.breadcrumb li + li:last-child {
 .sidebar-inner {
   background: var(--content-bg-color);
   border-radius: initial;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
   box-sizing: border-box;
   color: var(--text-color);
   width: 240px;
@@ -2731,18 +2764,21 @@ ul.breadcrumb li + li:last-child {
 .post-block {
   background: var(--content-bg-color);
   border-radius: initial;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
   padding: 40px;
 }
 .post-block + .post-block {
   border-radius: initial;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
   margin-top: 12px;
 }
 .comments {
   background: var(--content-bg-color);
   border-radius: initial;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
   margin-top: 12px;
   padding: 40px;
 }
@@ -2759,7 +2795,8 @@ ul.breadcrumb li + li:last-child {
   background: var(--content-bg-color);
   border-radius: initial;
   border-top: initial;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
   margin: 12px 0 0;
   padding: 10px 0 10px;
 }
@@ -2777,10 +2814,12 @@ ul.breadcrumb li + li:last-child {
 }
 .sub-menu {
   border-bottom: initial;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 .sub-menu + .content .post-block {
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
   margin-top: 12px;
 }
 @media (min-width: 768px) and (max-width: 991px) {
@@ -2809,7 +2848,8 @@ ul.breadcrumb li + li:last-child {
   }
   .post-block {
     border-radius: initial;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06),
+      0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
     padding: 20px;
   }
   .post-block + .post-block {
@@ -2832,7 +2872,8 @@ ul.breadcrumb li + li:last-child {
   }
   .post-block {
     border-radius: initial;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.06), 0 1px 5px 0 rgba(0,0,0,0.12), 0 -1px 0.5px 0 rgba(0,0,0,0.09);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.06),
+      0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 -1px 0.5px 0 rgba(0, 0, 0, 0.09);
     min-height: auto;
     padding: 12px;
   }
