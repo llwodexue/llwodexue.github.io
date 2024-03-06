@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llmysnow.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llmysnow.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="动态路由后台管理系统，大部分都会涉及到权限控制这一项需求，即：根据不同登录角色渲染不同页面功能 现在主流有两种方式：  前端控制 逻辑简单，上手快  后端控制 相对安全，需要后期改动">
@@ -27,8 +27,8 @@
 <meta property="og:site_name" content="奇幻的梦之旅">
 <meta property="og:description" content="动态路由后台管理系统，大部分都会涉及到权限控制这一项需求，即：根据不同登录角色渲染不同页面功能 现在主流有两种方式：  前端控制 逻辑简单，上手快  后端控制 相对安全，需要后期改动">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-04-29T03:07:32.171Z">
-<meta property="article:modified_time" content="2021-08-27T07:57:46.324Z">
+<meta property="article:published_time" content="2021-08-31T02:16:08.893Z">
+<meta property="article:modified_time" content="2021-08-31T02:16:08.894Z">
 <meta property="article:author" content="LiLyn">
 <meta property="article:tag" content="Vue">
 <meta property="article:tag" content="前端路由">
@@ -81,14 +81,14 @@
 
 <link rel="alternate" href="/atom.xml" title="奇幻的梦之旅" type="application/atom+xml">
 </head>
-<!--即时预加载技术，在用户点击之前预先加载页面-->
-<script src="https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@2.0.2/js/instantclick-1.2.2.js" type="module"></script>
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-	  <!--<a target="_blank" rel="noopener" href="https://github.com/llwodexue" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>-->
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+  <!--即时预加载技术，在用户点击之前预先加载页面-->
+  <script src="/js/instantclick-1.2.2.js" type="module"></script>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <div class="container use-motion">
+      <div class="headband"></div>
+      <a target="_blank" rel="noopener" href="https://github.com/llwodexue" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
       <span class="toggle-line toggle-line-first"></span>
@@ -173,22 +173,22 @@
   </div>
 
 </div>
-    </header>
+      </header>
 
-    
+      
   <div class="back-to-top">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
+      <main class="main">
+        <div class="main-inner">
+          <div class="content-wrap">
             
+
+            <div class="content post posts-expand">
+              
 
     
   
@@ -217,7 +217,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-04-29 11:07:32" itemprop="dateCreated datePublished" datetime="2021-04-29T11:07:32+08:00">2021-04-29</time>
+              <time title="创建时间：2021-08-31 10:16:08" itemprop="dateCreated datePublished" datetime="2021-08-31T10:16:08+08:00">2021-08-31</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -264,7 +264,7 @@
 <p>相对安全，需要后期改动</p>
 </li>
 </ol>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="后端控制"><a href="#后端控制" class="headerlink" title="后端控制"></a>后端控制</h2><p>后端路由是大部分后台管理项目的解决方案</p>
 <p>核心：用户登录以后，后端根据该角色生成可访问的路由数据，前端根据这个路由数据转换成自己需要的路由结构</p>
@@ -274,17 +274,17 @@
 <p>代码参考：<a target="_blank" rel="noopener" href="https://github.com/PanJiaChen/vue-element-admin/blob/master/src/router/index.js">https://github.com/PanJiaChen/vue-element-admin/blob/master/src/router/index.js</a></p>
 </li>
 <li><p>在 vuex 中写一个 state，把路由和获取到的角色进行匹配，控制菜单栏的显示隐藏</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; constantRoutes &#125; <span class="keyword">from</span> <span class="string">&#x27;@/router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; getRoutes &#125; <span class="keyword">from</span> <span class="string">&#x27;@/api/menu&#x27;</span></span><br><span class="line"><span class="keyword">import</span> Layout <span class="keyword">from</span> <span class="string">&#x27;@/layout/index&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历后台传来的路由字符串，转换为组件对象</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">filterAsyncRoutes</span>(<span class="params">asyncRouterMap</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> asyncRouterMap.filter(<span class="function"><span class="params">route</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (route.component) &#123;</span><br><span class="line">      <span class="comment">// Layout组件特殊处理</span></span><br><span class="line">      <span class="keyword">if</span> (route.component === <span class="string">&#x27;Layout&#x27;</span>) &#123;</span><br><span class="line">        route.component = Layout</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        route.component = loadView(route.component)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (route.children &amp;&amp; route.children.length) &#123;</span><br><span class="line">      route.children = filterAsyncRoutes(route.children)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadView</span>(<span class="params">view</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 注意：webpack4动态import不支持变量方式，如下写法是不行的</span></span><br><span class="line">  <span class="comment">// return () =&gt; import(`@/views/$&#123;view&#125;`)</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">require</span>([<span class="string">`@/views/<span class="subst">$&#123;view&#125;</span>`</span>], resolve)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> permission = &#123;</span><br><span class="line">  state: &#123;</span><br><span class="line">    routes: [],</span><br><span class="line">    addRoutes: [],</span><br><span class="line">  &#125;,</span><br><span class="line">  mutations: &#123;</span><br><span class="line">    SET_ROUTES: <span class="function">(<span class="params">state, routes</span>) =&gt;</span> &#123;</span><br><span class="line">      state.addRoutes = routes</span><br><span class="line">      state.routes = constantRoutes.concat(routes)</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  actions: &#123;</span><br><span class="line">    <span class="function"><span class="title">GenerateRoutes</span>(<span class="params">&#123; commit &#125;</span>)</span> &#123;</span><br><span class="line">      <span class="keyword">const</span> Id = sessionStorage.getItem(<span class="string">&#x27;SESSION_KEY&#x27;</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        getRoutes(Id).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> accessedRoutes = filterAsyncRoutes(res.data)</span><br><span class="line">          accessedRoutes.push(&#123; <span class="attr">path</span>: <span class="string">&#x27;*&#x27;</span>, <span class="attr">redirect</span>: <span class="string">&#x27;/404&#x27;</span>, <span class="attr">hidden</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">          commit(<span class="string">&#x27;SET_ROUTES&#x27;</span>, accessedRoutes)</span><br><span class="line">          resolve(accessedRoutes)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; constantRoutes &#125; <span class="keyword">from</span> <span class="string">&#x27;@/router&#x27;</span></span><br><span class="line"><span class="keyword">import</span> &#123; getRoutes &#125; <span class="keyword">from</span> <span class="string">&#x27;@/api/menu&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Layout</span> <span class="keyword">from</span> <span class="string">&#x27;@/layout/index&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历后台传来的路由字符串，转换为组件对象</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">filterAsyncRoutes</span>(<span class="params">asyncRouterMap</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> asyncRouterMap.<span class="title function_">filter</span>(<span class="function"><span class="params">route</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (route.<span class="property">component</span>) &#123;</span><br><span class="line">      <span class="comment">// Layout组件特殊处理</span></span><br><span class="line">      <span class="keyword">if</span> (route.<span class="property">component</span> === <span class="string">&#x27;Layout&#x27;</span>) &#123;</span><br><span class="line">        route.<span class="property">component</span> = <span class="title class_">Layout</span></span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        route.<span class="property">component</span> = <span class="title function_">loadView</span>(route.<span class="property">component</span>)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (route.<span class="property">children</span> &amp;&amp; route.<span class="property">children</span>.<span class="property">length</span>) &#123;</span><br><span class="line">      route.<span class="property">children</span> = <span class="title function_">filterAsyncRoutes</span>(route.<span class="property">children</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">loadView</span>(<span class="params">view</span>) &#123;</span><br><span class="line">  <span class="comment">// 注意：webpack4动态import不支持变量方式，如下写法是不行的</span></span><br><span class="line">  <span class="comment">// return () =&gt; import(`@/views/$&#123;view&#125;`)</span></span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="params">resolve</span> =&gt;</span> <span class="built_in">require</span>([<span class="string">`@/views/<span class="subst">$&#123;view&#125;</span>`</span>], resolve)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> permission = &#123;</span><br><span class="line">  <span class="attr">state</span>: &#123;</span><br><span class="line">    <span class="attr">routes</span>: [],</span><br><span class="line">    <span class="attr">addRoutes</span>: [],</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">mutations</span>: &#123;</span><br><span class="line">    <span class="attr">SET_ROUTES</span>: <span class="function">(<span class="params">state, routes</span>) =&gt;</span> &#123;</span><br><span class="line">      state.<span class="property">addRoutes</span> = routes</span><br><span class="line">      state.<span class="property">routes</span> = constantRoutes.<span class="title function_">concat</span>(routes)</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">actions</span>: &#123;</span><br><span class="line">    <span class="title class_">GenerateRoutes</span>(&#123; commit &#125;) &#123;</span><br><span class="line">      <span class="keyword">const</span> <span class="title class_">Id</span> = <span class="variable language_">sessionStorage</span>.<span class="title function_">getItem</span>(<span class="string">&#x27;SESSION_KEY&#x27;</span>)</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">getRoutes</span>(<span class="title class_">Id</span>).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> accessedRoutes = <span class="title function_">filterAsyncRoutes</span>(res.<span class="property">data</span>)</span><br><span class="line">          accessedRoutes.<span class="title function_">push</span>(&#123; <span class="attr">path</span>: <span class="string">&#x27;*&#x27;</span>, <span class="attr">redirect</span>: <span class="string">&#x27;/404&#x27;</span>, <span class="attr">hidden</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">          <span class="title function_">commit</span>(<span class="string">&#x27;SET_ROUTES&#x27;</span>, accessedRoutes)</span><br><span class="line">          <span class="title function_">resolve</span>(accessedRoutes)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>给后端整理一份前端需要的 router 数据结构</p>
 <p>一般必须有的参数：id、path、name、title、children</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">path: <span class="comment"># 路由地址</span></span><br><span class="line">name: <span class="comment"># 路由名称</span></span><br><span class="line">id: <span class="comment"># id</span></span><br><span class="line">component: <span class="comment"># 组件路径</span></span><br><span class="line">meta-&gt;title: <span class="comment"># 菜单名称(和path同级就可以)</span></span><br><span class="line">meta-&gt;icon: <span class="comment"># 菜单图标(和path同级就可以)</span></span><br><span class="line">meta-&gt;<span class="built_in">type</span>: <span class="comment"># 菜单类型，用于区分模块、目录、菜单、按钮</span></span><br><span class="line">meta-&gt;hidden: <span class="comment"># 是否全局隐藏此菜单</span></span><br><span class="line">children: <span class="comment"># 子集集合</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">path: <span class="comment"># 路由地址</span></span><br><span class="line">name: <span class="comment"># 路由名称</span></span><br><span class="line"><span class="built_in">id</span>: <span class="comment"># id</span></span><br><span class="line">component: <span class="comment"># 组件路径</span></span><br><span class="line">meta-&gt;title: <span class="comment"># 菜单名称(和path同级就可以)</span></span><br><span class="line">meta-&gt;icon: <span class="comment"># 菜单图标(和path同级就可以)</span></span><br><span class="line">meta-&gt;<span class="built_in">type</span>: <span class="comment"># 菜单类型，用于区分模块、目录、菜单、按钮</span></span><br><span class="line">meta-&gt;hidden: <span class="comment"># 是否全局隐藏此菜单</span></span><br><span class="line">children: <span class="comment"># 子集集合</span></span><br></pre></td></tr></table></figure>
 
 <p>如果后端传的不是 children，是 parentId 那种类型，则需要写一个转换方法</p>
 <p>方法可以参考这篇文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38689395/article/details/116019842?spm=1001.2014.3001.5501">Vue 封装无限层级树形菜单组件（后台传的是扁平数组）</a></p>
 </li>
 <li><p>在导航守卫中，使用 <code>router.beforeEach</code> 进行拦截，可以动态添加可访问的路由表（使用 addRoutes 添加）</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> NProgress <span class="keyword">from</span> <span class="string">&#x27;nprogress&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;nprogress/nprogress.css&#x27;</span></span><br><span class="line"></span><br><span class="line">NProgress.configure(&#123; <span class="attr">showSpinner</span>: <span class="literal">false</span> &#125;)</span><br><span class="line"><span class="keyword">const</span> whiteList = [<span class="string">&#x27;/login&#x27;</span>, <span class="string">&#x27;/auth-redirect&#x27;</span>, <span class="string">&#x27;/bind&#x27;</span>, <span class="string">&#x27;/register&#x27;</span>]</span><br><span class="line"></span><br><span class="line">router.beforeEach(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  NProgress.start()</span><br><span class="line">  <span class="comment">// 判断是否有token</span></span><br><span class="line">  <span class="keyword">if</span> (store.getters.token) &#123;</span><br><span class="line">    <span class="keyword">if</span> (to.path === <span class="string">&#x27;/login&#x27;</span>) &#123;</span><br><span class="line">      next(&#123; <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span> &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 判断当前用户是否已拉取完user_info信息</span></span><br><span class="line">      <span class="keyword">if</span> (store.getters.roles.length === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 获取info信息</span></span><br><span class="line">        store.dispatch(<span class="string">&#x27;GetInfo&#x27;</span>).then(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> roles = res.roles</span><br><span class="line">          store</span><br><span class="line">            .dispatch(<span class="string">&#x27;GenerateRoutes&#x27;</span>, &#123; roles &#125;)</span><br><span class="line">            .then(<span class="function"><span class="params">accessRoutes</span> =&gt;</span> &#123;</span><br><span class="line">              <span class="comment">// 动态添加可访问路由表</span></span><br><span class="line">              router.addRoutes(accessRoutes)</span><br><span class="line">              <span class="comment">// hack方法 确保addRoutes已完成</span></span><br><span class="line">              next(&#123; ...to, <span class="attr">replace</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">            .catch(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">              <span class="built_in">console</span>.log(err)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 当有用户权限的时候，说明可访问路由表已生成</span></span><br><span class="line">        next()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (whiteList.includes(to.path)) &#123;</span><br><span class="line">      <span class="comment">// 在免登录白名单，直接进入</span></span><br><span class="line">      next()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 否则全部重定向到登录页</span></span><br><span class="line">      next(<span class="string">&#x27;/login&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="title class_">NProgress</span> <span class="keyword">from</span> <span class="string">&#x27;nprogress&#x27;</span></span><br><span class="line"><span class="keyword">import</span> <span class="string">&#x27;nprogress/nprogress.css&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="title class_">NProgress</span>.<span class="title function_">configure</span>(&#123; <span class="attr">showSpinner</span>: <span class="literal">false</span> &#125;)</span><br><span class="line"><span class="keyword">const</span> whiteList = [<span class="string">&#x27;/login&#x27;</span>, <span class="string">&#x27;/auth-redirect&#x27;</span>, <span class="string">&#x27;/bind&#x27;</span>, <span class="string">&#x27;/register&#x27;</span>]</span><br><span class="line"></span><br><span class="line">router.<span class="title function_">beforeEach</span>(<span class="function">(<span class="params">to, <span class="keyword">from</span>, next</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="title class_">NProgress</span>.<span class="title function_">start</span>()</span><br><span class="line">  <span class="comment">// 判断是否有token</span></span><br><span class="line">  <span class="keyword">if</span> (store.<span class="property">getters</span>.<span class="property">token</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (to.<span class="property">path</span> === <span class="string">&#x27;/login&#x27;</span>) &#123;</span><br><span class="line">      <span class="title function_">next</span>(&#123; <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span> &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 判断当前用户是否已拉取完user_info信息</span></span><br><span class="line">      <span class="keyword">if</span> (store.<span class="property">getters</span>.<span class="property">roles</span>.<span class="property">length</span> === <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="comment">// 获取info信息</span></span><br><span class="line">        store.<span class="title function_">dispatch</span>(<span class="string">&#x27;GetInfo&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">res</span> =&gt;</span> &#123;</span><br><span class="line">          <span class="keyword">const</span> roles = res.<span class="property">roles</span></span><br><span class="line">          store</span><br><span class="line">            .<span class="title function_">dispatch</span>(<span class="string">&#x27;GenerateRoutes&#x27;</span>, &#123; roles &#125;)</span><br><span class="line">            .<span class="title function_">then</span>(<span class="function"><span class="params">accessRoutes</span> =&gt;</span> &#123;</span><br><span class="line">              <span class="comment">// 动态添加可访问路由表</span></span><br><span class="line">              router.<span class="title function_">addRoutes</span>(accessRoutes)</span><br><span class="line">              <span class="comment">// hack方法 确保addRoutes已完成</span></span><br><span class="line">              <span class="title function_">next</span>(&#123; ...to, <span class="attr">replace</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">            &#125;)</span><br><span class="line">            .<span class="title function_">catch</span>(<span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">              <span class="variable language_">console</span>.<span class="title function_">log</span>(err)</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 当有用户权限的时候，说明可访问路由表已生成</span></span><br><span class="line">        <span class="title function_">next</span>()</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (whiteList.<span class="title function_">includes</span>(to.<span class="property">path</span>)) &#123;</span><br><span class="line">      <span class="comment">// 在免登录白名单，直接进入</span></span><br><span class="line">      <span class="title function_">next</span>()</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="comment">// 否则全部重定向到登录页</span></span><br><span class="line">      <span class="title function_">next</span>(<span class="string">&#x27;/login&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>从 router 中取出可用的路由对象，来进行侧边栏的渲染</p>
 </li>
@@ -322,11 +322,11 @@
 		  
 			
 <div class="my_post_copyright clearfix">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <script src="/js/clipboard.min.js"></script>
   
   <!-- JS库 sweetalert 可修改路径 -->
-  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="/js/jquery_v2.min.js"></script>
+  <script src="/js/sweetalert.min.js"></script>
   <article class="box-left">
     <img src="https://gitee.com/lilyn/pic/raw/master/logo.jpg">
   </article>
@@ -385,12 +385,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/9fef765/" rel="prev" title="Vue 封装无限层级树形菜单组件（后台传的是扁平数组）">
-      <i class="fa fa-chevron-left"></i> Vue 封装无限层级树形菜单组件（后台传的是扁平数组）
+    <a href="/posts/b05a9b29/" rel="prev" title="Vue 大量数据展示卡顿解决方案（长列表优化）">
+      <i class="fa fa-chevron-left"></i> Vue 大量数据展示卡顿解决方案（长列表优化）
     </a></div>
       <div class="post-nav-item">
-    <a href="/posts/5a7a946b/" rel="next" title="免安装版 MySQL（附带 SQLyog 安装包）">
-      免安装版 MySQL（附带 SQLyog 安装包） <i class="fa fa-chevron-right"></i>
+    <a href="/posts/bb3fd12a/" rel="next" title="Yapi安装部署（接口管理服务）">
+      Yapi安装部署（接口管理服务） <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -402,8 +402,8 @@
 
 
 
-          </div>
-          
+            </div>
+            
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -427,8 +427,8 @@
   }
 </script>
 
-        </div>
-          
+          </div>
+            
   
   <div class="toggle sidebar-toggle">
     <span class="toggle-line toggle-line-first"></span>
@@ -515,19 +515,19 @@
   <div id="sidebar-dimmer"></div>
 
 
-      </div>
-    </main>
+        </div>
+      </main>
 
-    <footer class="footer">
-      <div class="footer-inner">
-        
+      <footer class="footer">
+        <div class="footer-inner">
+          
 
-        
+          
 
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -561,7 +561,7 @@
   </span>
 </div>-->
 
-        
+          
 
 
 
@@ -570,13 +570,14 @@
 
 
 
-      </div>
-    </footer>
-  </div>
+        </div>
+      </footer>
+    </div>
 
-  
+    
   <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/medium-zoom.min.js"></script>
+  <script src="/lib/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -593,7 +594,7 @@
 
 
 
-  
+    
   <script>
     (function(){
       var canonicalURL, curProtocol;
@@ -638,15 +639,13 @@
 
 
 
-  
+    
 
-  
+    
 
-  <!-- 动态线条背景 -->
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-  <!-- 页面点击小红心 -->
-  <script type="text/javascript">
-	!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
-  </script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+    <!-- 动态线条背景 -->
+    <script type="text/javascript" src="/js/canvas-nest.min.js"></script>
+    <!-- 页面点击小红心 -->
+    <script type="text/javascript" src="/js/love.min.js"></script>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
 </html>

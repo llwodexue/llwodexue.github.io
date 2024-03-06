@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
+<meta name="generator" content="Hexo 5.4.2">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
@@ -17,7 +17,7 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"llmysnow.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+    var CONFIG = {"hostname":"llmysnow.top","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":true,"lazyload":true,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="当浏览器开辟出供 js 执行的栈内存之后，代码并不是立即自上而下执行，而是需要先做一些事情：把当前作用域中带 var 和 function 的关键字进行提前的声明和定义（变量提升）  var：只声明，未定义（不赋值） function：声明和定义（赋值）一起完成">
@@ -28,13 +28,13 @@
 <meta property="og:description" content="当浏览器开辟出供 js 执行的栈内存之后，代码并不是立即自上而下执行，而是需要先做一些事情：把当前作用域中带 var 和 function 的关键字进行提前的声明和定义（变量提升）  var：只声明，未定义（不赋值） function：声明和定义（赋值）一起完成">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/lilyn/pic/raw/master/js-img/JavaScript%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7.jpg">
-<meta property="article:published_time" content="2020-11-24T12:00:24.088Z">
-<meta property="article:modified_time" content="2021-05-28T01:44:29.935Z">
+<meta property="article:published_time" content="2021-08-30T02:30:08.599Z">
+<meta property="article:modified_time" content="2021-08-30T02:30:08.600Z">
 <meta property="article:author" content="LiLyn">
 <meta property="article:tag" content="JavaScript">
-<meta property="article:tag" content="前端">
 <meta property="article:tag" content="作用域">
 <meta property="article:tag" content="变量提升特殊性">
+<meta property="article:tag" content="前端">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://gitee.com/lilyn/pic/raw/master/js-img/JavaScript%E8%BF%90%E7%AE%97%E7%AC%A6%E4%BC%98%E5%85%88%E7%BA%A7.jpg">
 
@@ -84,14 +84,14 @@
 
 <link rel="alternate" href="/atom.xml" title="奇幻的梦之旅" type="application/atom+xml">
 </head>
-<!--即时预加载技术，在用户点击之前预先加载页面-->
-<script src="https://cdn.jsdelivr.net/gh/TRHX/CDN-for-itrhx.com@2.0.2/js/instantclick-1.2.2.js" type="module"></script>
-<body itemscope itemtype="http://schema.org/WebPage">
-  <div class="container use-motion">
-    <div class="headband"></div>
-	  <!--<a target="_blank" rel="noopener" href="https://github.com/llwodexue" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>-->
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
+  <!--即时预加载技术，在用户点击之前预先加载页面-->
+  <script src="/js/instantclick-1.2.2.js" type="module"></script>
+  <body itemscope itemtype="http://schema.org/WebPage">
+    <div class="container use-motion">
+      <div class="headband"></div>
+      <a target="_blank" rel="noopener" href="https://github.com/llwodexue" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+        <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
     <div class="toggle" aria-label="切换导航栏">
       <span class="toggle-line toggle-line-first"></span>
@@ -176,22 +176,22 @@
   </div>
 
 </div>
-    </header>
+      </header>
 
-    
+      
   <div class="back-to-top">
     <i class="fa fa-arrow-up"></i>
     <span>0%</span>
   </div>
 
 
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content post posts-expand">
+      <main class="main">
+        <div class="main-inner">
+          <div class="content-wrap">
             
+
+            <div class="content post posts-expand">
+              
 
     
   
@@ -220,7 +220,7 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2020-11-24 20:00:24" itemprop="dateCreated datePublished" datetime="2020-11-24T20:00:24+08:00">2020-11-24</time>
+              <time title="创建时间：2021-08-30 10:30:08" itemprop="dateCreated datePublished" datetime="2021-08-30T10:30:08+08:00">2021-08-30</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -262,13 +262,13 @@
 <li>var：只声明，未定义（不赋值）</li>
 <li>function：声明和定义（赋值）一起完成</li>
 </ul>
-<a id="more"></a>
+<span id="more"></span>
 
 <h2 id="匿名函数具名化"><a href="#匿名函数具名化" class="headerlink" title="匿名函数具名化"></a>匿名函数具名化</h2><p>匿名函数具名化【规范函数执行的顺序】</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fn = <span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">&#x27;ok&#x27;</span>)</span><br><span class="line">  sum = <span class="number">100</span> <span class="comment">// 默认情况下，其值是不能修改的</span></span><br><span class="line">  <span class="built_in">console</span>.log(sum) <span class="comment">// 函数本身 // 具名话的名字可以在函数内部的上下文中使用【代表函数本身】</span></span><br><span class="line"></span><br><span class="line">  <span class="built_in">console</span>.log(sum) <span class="comment">// undefined // 虽然具名化的名字会在当前函数的私有上下文中被声明，当做私有变量处理，但是它的优先级是比较低的</span></span><br><span class="line">  <span class="keyword">var</span> sum</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">sum() <span class="comment">// 具名化设置的函数名不能在函数以外使用【因为没有在当前上下文中声明这个变量】</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fn = <span class="keyword">function</span> <span class="title function_">sum</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;ok&#x27;</span>)</span><br><span class="line">  sum = <span class="number">100</span> <span class="comment">// 默认情况下，其值是不能修改的</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(sum) <span class="comment">// 函数本身 // 具名话的名字可以在函数内部的上下文中使用【代表函数本身】</span></span><br><span class="line"></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(sum) <span class="comment">// undefined // 虽然具名化的名字会在当前函数的私有上下文中被声明，当做私有变量处理，但是它的优先级是比较低的</span></span><br><span class="line">  <span class="keyword">var</span> sum</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="title function_">sum</span>() <span class="comment">// 具名化设置的函数名不能在函数以外使用【因为没有在当前上下文中声明这个变量】</span></span><br></pre></td></tr></table></figure>
 
 <p>匿名函数具名化可以让匿名函数实现递归调用</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span></span><br><span class="line">;(<span class="function"><span class="keyword">function</span> <span class="title">anonymous</span>(<span class="params">x</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (x &lt; <span class="number">0</span>) <span class="keyword">return</span></span><br><span class="line">  anonymous(x - <span class="number">1</span>)</span><br><span class="line">  <span class="comment">// arguments.callee(x - 1) // 开启严格模式则会报错</span></span><br><span class="line">&#125;)(<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&#x27;use strict&#x27;</span></span><br><span class="line">;(<span class="keyword">function</span> <span class="title function_">anonymous</span>(<span class="params">x</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (x &lt; <span class="number">0</span>) <span class="keyword">return</span></span><br><span class="line">  <span class="title function_">anonymous</span>(x - <span class="number">1</span>)</span><br><span class="line">  <span class="comment">// arguments.callee(x - 1) // 开启严格模式则会报错</span></span><br><span class="line">&#125;)(<span class="number">100</span>)</span><br></pre></td></tr></table></figure>
 
 
 
@@ -283,7 +283,7 @@
 <ul>
 <li>函数没有形参，且函数体里没有 var 声明</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">6</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">    a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">fn();</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line">    a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">fn</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br></pre></td></tr></table></figure>
 
 <p>答案：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 6</span></span><br><span class="line"><span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
@@ -294,20 +294,20 @@
 <ul>
 <li><p>形参</p>
 <p>函数有形参，但没有传实参，且打印在赋值之前</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">6</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);</span><br><span class="line">    a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">fn();</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">6</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">a</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line">    a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">fn</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br></pre></td></tr></table></figure>
 
 <p>答案：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="comment">// 6</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>在私有作用域中声明的变量</p>
 <p>函数没有形参，函数体里有 var 声明</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  <span class="built_in">console</span>.log(a, b);</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">12</span>,</span><br><span class="line">      b = <span class="number">12</span>;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="comment">// 变量提升 var a；a 是私有的， b是 windows 全局作用域</span></span><br><span class="line">      <span class="built_in">console</span>.log(a, b);</span><br><span class="line">      <span class="comment">// 下面语句相当于 b=13; var a=b</span></span><br><span class="line">      <span class="keyword">var</span> a = b = <span class="number">13</span>;</span><br><span class="line">      <span class="built_in">console</span>.log(a, b);</span><br><span class="line">  &#125;</span><br><span class="line">  fn();</span><br><span class="line"><span class="built_in">console</span>.log(a, b);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(a, b);</span><br><span class="line">  <span class="keyword">var</span> a = <span class="number">12</span>,</span><br><span class="line">      b = <span class="number">12</span>;</span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">      <span class="comment">// 变量提升 var a；a 是私有的， b是 windows 全局作用域</span></span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(a, b);</span><br><span class="line">      <span class="comment">// 下面语句相当于 b=13; var a=b</span></span><br><span class="line">      <span class="keyword">var</span> a = b = <span class="number">13</span>;</span><br><span class="line">      <span class="variable language_">console</span>.<span class="title function_">log</span>(a, b);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">fn</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a, b);</span><br></pre></td></tr></table></figure>
 
 <p>答案：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// undefined undefined</span></span><br><span class="line"><span class="comment">// undefined 12</span></span><br><span class="line"><span class="comment">// 13 13</span></span><br><span class="line"><span class="comment">// 12 13</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>复合（形参 + 私有作用域中声明变量）</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    私有作用域 fn(a)</span></span><br><span class="line"><span class="comment">    1.形参赋值 a=12; a是私有的</span></span><br><span class="line"><span class="comment">    2.变量提升 var b; b是私有的</span></span><br><span class="line"><span class="comment">        只有 c 是全局作用域的</span></span><br><span class="line"><span class="comment">    3.代码自上而下执行</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">12</span>,</span><br><span class="line">    b = <span class="number">13</span>,</span><br><span class="line">    c = <span class="number">14</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a, b, c);</span><br><span class="line">    <span class="keyword">var</span> b = c = a = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(a, b, c);</span><br><span class="line">&#125;</span><br><span class="line">fn(a);</span><br><span class="line"><span class="built_in">console</span>.log(a, b, c);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    私有作用域 fn(a)</span></span><br><span class="line"><span class="comment">    1.形参赋值 a=12; a是私有的</span></span><br><span class="line"><span class="comment">    2.变量提升 var b; b是私有的</span></span><br><span class="line"><span class="comment">        只有 c 是全局作用域的</span></span><br><span class="line"><span class="comment">    3.代码自上而下执行</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">var</span> a = <span class="number">12</span>,</span><br><span class="line">    b = <span class="number">13</span>,</span><br><span class="line">    c = <span class="number">14</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">a</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a, b, c);</span><br><span class="line">    <span class="keyword">var</span> b = c = a = <span class="number">20</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a, b, c);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">fn</span>(a);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a, b, c);</span><br></pre></td></tr></table></figure>
 
 <p>答案：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 12 undefined 14</span></span><br><span class="line"><span class="comment">// 20 20 20</span></span><br><span class="line"><span class="comment">// 12 13 20</span></span><br></pre></td></tr></table></figure>
@@ -317,12 +317,12 @@
 <h3 id="块级作用域"><a href="#块级作用域" class="headerlink" title="块级作用域"></a>块级作用域</h3><ul>
 <li>let 声明的变量不进行变量提升不能重复声明</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">10</span>,</span><br><span class="line">    b = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// a 变成私有变量，这个私有作用域没有 b，需要向上级查找</span></span><br><span class="line">    <span class="keyword">let</span> a = b = <span class="number">20</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(a, b);</span><br><span class="line">&#125;;</span><br><span class="line">fn();</span><br><span class="line"><span class="built_in">console</span>.log(a, b);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> a = <span class="number">10</span>,</span><br><span class="line">    b = <span class="number">10</span>;</span><br><span class="line"><span class="keyword">let</span> fn = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// a 变成私有变量，这个私有作用域没有 b，需要向上级查找</span></span><br><span class="line">    <span class="keyword">let</span> a = b = <span class="number">20</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a, b);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="title function_">fn</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a, b);</span><br></pre></td></tr></table></figure>
 
 <p>答案：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 20 20</span></span><br><span class="line"><span class="comment">// 10 20</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="引用类型数据问题"><a href="#引用类型数据问题" class="headerlink" title="引用类型数据问题"></a>引用类型数据问题</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    1.变量提升：fn -&gt; 0x111(全局)；arr -&gt; 0x222(全局)</span></span><br><span class="line"><span class="comment">    2.代码自上而下执行，执行 fn(arr)</span></span><br><span class="line"><span class="comment">        1.形参赋值 arr -&gt; 0x222[12, 13]</span></span><br><span class="line"><span class="comment">        2.重新赋值 arr[0]=100 -&gt; 0x222[100, 13]</span></span><br><span class="line"><span class="comment">        3.arr=[100] -&gt; 0x333[100](函数fn中)</span></span><br><span class="line"><span class="comment">        4.arr[0]=0 -&gt; 0x333[0]</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">13</span>];</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">arr</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(arr);</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="number">100</span>;</span><br><span class="line">    arr = [<span class="number">100</span>];</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(arr);</span><br><span class="line">&#125;</span><br><span class="line">fn(arr);</span><br><span class="line"><span class="built_in">console</span>.log(arr);</span><br></pre></td></tr></table></figure>
+<h3 id="引用类型数据问题"><a href="#引用类型数据问题" class="headerlink" title="引用类型数据问题"></a>引用类型数据问题</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    1.变量提升：fn -&gt; 0x111(全局)；arr -&gt; 0x222(全局)</span></span><br><span class="line"><span class="comment">    2.代码自上而下执行，执行 fn(arr)</span></span><br><span class="line"><span class="comment">        1.形参赋值 arr -&gt; 0x222[12, 13]</span></span><br><span class="line"><span class="comment">        2.重新赋值 arr[0]=100 -&gt; 0x222[100, 13]</span></span><br><span class="line"><span class="comment">        3.arr=[100] -&gt; 0x333[100](函数fn中)</span></span><br><span class="line"><span class="comment">        4.arr[0]=0 -&gt; 0x333[0]</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">var</span> arr = [<span class="number">12</span>, <span class="number">13</span>];</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params">arr</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr);</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="number">100</span>;</span><br><span class="line">    arr = [<span class="number">100</span>];</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(arr);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">fn</span>(arr);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(arr);</span><br></pre></td></tr></table></figure>
 
 <p>答案：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [12,13]</span></span><br><span class="line"><span class="comment">// [0]</span></span><br><span class="line"><span class="comment">// [100,13]</span></span><br></pre></td></tr></table></figure>
@@ -333,7 +333,7 @@
 <p><strong>不论判断条件是否成立，都会进行变量提升</strong></p>
 </blockquote>
 <h4 id="条件不成立"><a href="#条件不成立" class="headerlink" title="* 条件不成立"></a>* 条件不成立</h4><p>var：<strong>只声明不定义</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不管条件是否成立，都会进行变量提升，var a</span></span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="comment">// 条件不成立，无法赋值</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不管条件是否成立，都会进行变量提升，var a</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="comment">// 条件不成立，无法赋值</span></span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a);</span><br></pre></td></tr></table></figure>
 
 <p>答案：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="comment">// undefined</span></span><br></pre></td></tr></table></figure>
@@ -347,7 +347,7 @@
 <p><code>delete fn</code> 返回 false（<code>var 变量</code> 无法使用 delete 删除）</p>
 </li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在新版本浏览器中，判断条件中的function相当于只声明未定义，所以undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(fn);</span><br><span class="line"><span class="built_in">console</span>.log(fn());</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;lion&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(fn);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在新版本浏览器中，判断条件中的function相当于只声明未定义，所以undefined</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(fn);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">fn</span>());</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">false</span>) &#123;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;lion&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(fn);</span><br></pre></td></tr></table></figure>
 
 <p>答案：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="comment">// TypeError: fn is not a function</span></span><br></pre></td></tr></table></figure>
@@ -355,7 +355,7 @@
 <h4 id="条件成立"><a href="#条件成立" class="headerlink" title="条件成立"></a>条件成立</h4><ul>
 <li><strong>判断条件成立，会对执行体中的 fn 进行变量提升</strong>（声明+赋值）</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(fn);</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(fn);</span><br><span class="line">    <span class="comment">// 全局作用域没有 fn ，给 fn 进行赋值</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(fn);</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(fn);</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(fn);</span><br><span class="line">    <span class="comment">// 全局作用域没有 fn ，给 fn 进行赋值</span></span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;hello&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(fn);</span><br></pre></td></tr></table></figure>
 
 <p>答案：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="comment">// [Function: fn]</span></span><br><span class="line"><span class="comment">// [Function: fn]</span></span><br></pre></td></tr></table></figure>
@@ -365,7 +365,7 @@
 <p>可以把<code>if()&#123;&#125; 的 </code> <code>&#123; &#125;</code> 理解成块级作用域（特例： function(){} 的 <code>&#123; &#125;</code>是私有作用域）</p>
 </li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a);  <span class="comment">// [Function: a]</span></span><br><span class="line">    a = <span class="number">5</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">    a = <span class="number">7</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(a);  <span class="comment">// 7</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">console</span>.log(a);  <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a);  <span class="comment">// [Function: a]</span></span><br><span class="line">    a = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">a</span>(<span class="params"></span>) &#123;&#125;</span><br><span class="line">    a = <span class="number">7</span>;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(a);  <span class="comment">// 7</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(a);  <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
 
 <h3 id="自执行函数"><a href="#自执行函数" class="headerlink" title="自执行函数"></a>自执行函数</h3><ul>
 <li><strong>自执行函数在当前作用域下不进行变量提升</strong></li>
@@ -378,7 +378,7 @@
 <li>进入自执行函数，走到 if 语句中，函数 g 声明提升，此时 g 只声明未定义，相当于 undefined，所以 g() 会报类型错误</li>
 </ol>
 </blockquote>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;;</span><br><span class="line">g = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br><span class="line">~(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (g() &amp;&amp; [] == ![]) &#123;</span><br><span class="line">        f = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="function"><span class="keyword">function</span> <span class="title">g</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="built_in">console</span>.log(f());</span><br><span class="line"><span class="built_in">console</span>.log(g());</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">f = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;;</span><br><span class="line">g = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;;</span><br><span class="line">~(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="title function_">g</span>() &amp;&amp; [] == ![]) &#123;</span><br><span class="line">        f = <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">        <span class="keyword">function</span> <span class="title function_">g</span>(<span class="params"></span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">f</span>());</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">g</span>());</span><br></pre></td></tr></table></figure>
 
 <p>答案：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// TypeError: g is not a function</span></span><br></pre></td></tr></table></figure>
@@ -406,7 +406,7 @@
 <h3 id="赋值运算"><a href="#赋值运算" class="headerlink" title="赋值运算"></a>赋值运算</h3><ul>
 <li><strong>只对等号左边进行变量提升</strong>（函数表达式）</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(fn);</span><br><span class="line"><span class="built_in">console</span>.log(fn(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line"><span class="keyword">var</span> fn = <span class="function"><span class="keyword">function</span> (<span class="params">n, m</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n + m;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">console</span>.log(fn(<span class="number">3</span>, <span class="number">4</span>));</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(fn);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">fn</span>(<span class="number">1</span>, <span class="number">2</span>));</span><br><span class="line"><span class="keyword">var</span> fn = <span class="keyword">function</span> (<span class="params">n, m</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> n + m;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">fn</span>(<span class="number">3</span>, <span class="number">4</span>));</span><br></pre></td></tr></table></figure>
 
 <p>答案：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// undefined</span></span><br><span class="line"><span class="comment">// TypeError: fn is not a function</span></span><br></pre></td></tr></table></figure>
@@ -415,7 +415,7 @@
 <li>return 下面的代码虽然不能执行，但是可以进行变量提升（f2 进行变量提升）</li>
 <li>return 后面的代码不能进行变量提升（f1 不进行变量提升）</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(f2);</span><br><span class="line">    <span class="built_in">console</span>.log(f1);</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">f1</span>(<span class="params"></span>) </span>&#123;&#125;;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">f2</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&quot;bird&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">fn();</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(f2);</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(f1);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span> <span class="title function_">f1</span>(<span class="params"></span>) &#123;&#125;;</span><br><span class="line">    <span class="keyword">function</span> <span class="title function_">f2</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;bird&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">fn</span>();</span><br></pre></td></tr></table></figure>
 
 <p>答案：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [Function: f2]</span></span><br><span class="line"><span class="comment">// ReferenceError: f1 is not defined</span></span><br></pre></td></tr></table></figure>
@@ -423,12 +423,12 @@
 <h3 id="重复变量名"><a href="#重复变量名" class="headerlink" title="重复变量名"></a>重复变量名</h3><ul>
 <li>var 不会进行重复声明，但会重新赋值</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">var</span> num = <span class="number">5</span>;</span><br><span class="line"><span class="built_in">console</span>.log(num); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">4</span>;</span><br><span class="line"><span class="keyword">var</span> num = <span class="number">5</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(num); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>function 在变量提升阶段 声明和定义是一同完成的，如果遇到重复声明定义的，会重新进行赋值</li>
 </ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">1.变量提升：</span></span><br><span class="line"><span class="comment">    function fn = 0x111</span></span><br><span class="line"><span class="comment">                = 0x222</span></span><br><span class="line"><span class="comment">                = 0x333</span></span><br><span class="line"><span class="comment">                = 0x444</span></span><br><span class="line"><span class="comment">2.代码从上到下执行</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">fn();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line">fn();</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// fn=100 给fn重新赋值</span></span><br><span class="line">fn = <span class="number">100</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">4</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// function 声明和定义早已完成， 100()则会报错</span></span><br><span class="line">fn();</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">1.变量提升：</span></span><br><span class="line"><span class="comment">    function fn = 0x111</span></span><br><span class="line"><span class="comment">                = 0x222</span></span><br><span class="line"><span class="comment">                = 0x333</span></span><br><span class="line"><span class="comment">                = 0x444</span></span><br><span class="line"><span class="comment">2.代码从上到下执行</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="title function_">fn</span>();</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">fn</span>();</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">3</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// fn=100 给fn重新赋值</span></span><br><span class="line">fn = <span class="number">100</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="number">4</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// function 声明和定义早已完成， 100()则会报错</span></span><br><span class="line"><span class="title function_">fn</span>();</span><br></pre></td></tr></table></figure>
 
 <p>答案：</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 4</span></span><br><span class="line"><span class="comment">// 4</span></span><br><span class="line"><span class="comment">// TypeError: fn is not a function</span></span><br></pre></td></tr></table></figure>
@@ -442,11 +442,11 @@
 		  
 			
 <div class="my_post_copyright clearfix">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+  <script src="/js/clipboard.min.js"></script>
   
   <!-- JS库 sweetalert 可修改路径 -->
-  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <script src="/js/jquery_v2.min.js"></script>
+  <script src="/js/sweetalert.min.js"></script>
   <article class="box-left">
     <img src="https://gitee.com/lilyn/pic/raw/master/logo.jpg">
   </article>
@@ -479,9 +479,9 @@
       <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
-              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
               <a href="/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F/" rel="tag"><i class="fa fa-tag"></i> 作用域</a>
               <a href="/tags/%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87%E7%89%B9%E6%AE%8A%E6%80%A7/" rel="tag"><i class="fa fa-tag"></i> 变量提升特殊性</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
           </div>
 		 
 		<!--post-tags 彩色标签-->
@@ -506,12 +506,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/posts/bf596df5/" rel="prev" title="牛客网本地刷题环境部署">
-      <i class="fa fa-chevron-left"></i> 牛客网本地刷题环境部署
+    <a href="/posts/94396d70/" rel="prev" title="Element 可选日期范围限制或检验（开始日期结束日期）">
+      <i class="fa fa-chevron-left"></i> Element 可选日期范围限制或检验（开始日期结束日期）
     </a></div>
       <div class="post-nav-item">
-    <a href="/posts/5a7a946b/" rel="next" title="Python 获取文件夹下所有图片尺寸">
-      Python 获取文件夹下所有图片尺寸 <i class="fa fa-chevron-right"></i>
+    <a href="/posts/8a7b4226/" rel="next" title="JS 不同数据类型的相互转换规则">
+      JS 不同数据类型的相互转换规则 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -523,8 +523,8 @@
 
 
 
-          </div>
-          
+            </div>
+            
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -548,8 +548,8 @@
   }
 </script>
 
-        </div>
-          
+          </div>
+            
   
   <div class="toggle sidebar-toggle">
     <span class="toggle-line toggle-line-first"></span>
@@ -636,19 +636,19 @@
   <div id="sidebar-dimmer"></div>
 
 
-      </div>
-    </main>
+        </div>
+      </main>
 
-    <footer class="footer">
-      <div class="footer-inner">
-        
+      <footer class="footer">
+        <div class="footer-inner">
+          
 
-        
+          
 
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2022</span>
+  <span itemprop="copyrightYear">2024</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -682,7 +682,7 @@
   </span>
 </div>-->
 
-        
+          
 
 
 
@@ -691,13 +691,14 @@
 
 
 
-      </div>
-    </footer>
-  </div>
+        </div>
+      </footer>
+    </div>
 
-  
+    
   <script src="/lib/anime.min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="/lib/medium-zoom.min.js"></script>
+  <script src="/lib/lozad.min.js"></script>
   <script src="/lib/velocity/velocity.min.js"></script>
   <script src="/lib/velocity/velocity.ui.min.js"></script>
 
@@ -714,7 +715,7 @@
 
 
 
-  
+    
   <script>
     (function(){
       var canonicalURL, curProtocol;
@@ -759,15 +760,13 @@
 
 
 
-  
+    
 
-  
+    
 
-  <!-- 动态线条背景 -->
-  <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
-  <!-- 页面点击小红心 -->
-  <script type="text/javascript">
-	!function(e,t,a){function n(){c(".heart{width: 10px;height: 10px;position: fixed;background: #f00;transform: rotate(45deg);-webkit-transform: rotate(45deg);-moz-transform: rotate(45deg);}.heart:after,.heart:before{content: '';width: inherit;height: inherit;background: inherit;border-radius: 50%;-webkit-border-radius: 50%;-moz-border-radius: 50%;position: fixed;}.heart:after{top: -5px;}.heart:before{left: -5px;}"),o(),r()}function r(){for(var e=0;e<d.length;e++)d[e].alpha<=0?(t.body.removeChild(d[e].el),d.splice(e,1)):(d[e].y--,d[e].scale+=.004,d[e].alpha-=.013,d[e].el.style.cssText="left:"+d[e].x+"px;top:"+d[e].y+"px;opacity:"+d[e].alpha+";transform:scale("+d[e].scale+","+d[e].scale+") rotate(45deg);background:"+d[e].color+";z-index:99999");requestAnimationFrame(r)}function o(){var t="function"==typeof e.onclick&&e.onclick;e.onclick=function(e){t&&t(),i(e)}}function i(e){var a=t.createElement("div");a.className="heart",d.push({el:a,x:e.clientX-5,y:e.clientY-5,scale:1,alpha:1,color:s()}),t.body.appendChild(a)}function c(e){var a=t.createElement("style");a.type="text/css";try{a.appendChild(t.createTextNode(e))}catch(t){a.styleSheet.cssText=e}t.getElementsByTagName("head")[0].appendChild(a)}function s(){return"rgb("+~~(255*Math.random())+","+~~(255*Math.random())+","+~~(255*Math.random())+")"}var d=[];e.requestAnimationFrame=function(){return e.requestAnimationFrame||e.webkitRequestAnimationFrame||e.mozRequestAnimationFrame||e.oRequestAnimationFrame||e.msRequestAnimationFrame||function(e){setTimeout(e,1e3/60)}}(),n()}(window,document);
-  </script>
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
+    <!-- 动态线条背景 -->
+    <script type="text/javascript" src="/js/canvas-nest.min.js"></script>
+    <!-- 页面点击小红心 -->
+    <script type="text/javascript" src="/js/love.min.js"></script>
+  <script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"react":{"opacity":0.7}});</script></body>
 </html>
